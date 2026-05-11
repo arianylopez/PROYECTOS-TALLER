@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PsiManager - Calendario</title>
+    
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="app.js" defer></script>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <h1 class="sidebar__brand">PsiManager</h1>
+            
+            <nav class="sidebar__nav">
+                <a href="#" class="sidebar__link sidebar__link--active" id="linkCalendario">
+                    <i data-lucide="layout-grid"></i> Calendario
+                </a>
+                <a href="#" class="sidebar__link" id="linkPacientes">
+                    <i data-lucide="users"></i> Pacientes
+                </a>
+                <a href="#" class="sidebar__link" id="linkHorarios">
+                    <i data-lucide="clock"></i> Horarios
+                </a>
+            </nav>
+
+            <div class="sidebar__widget">
+                <h3 class="sidebar__widget-title">
+                    <i data-lucide="clock"></i> Próximos Turnos
+                </h3>
+                <div class="upcoming-list" id="listaProximosTurnos">
+                    <p class="upcoming-empty">Cargando turnos...</p>
+                </div>
+            </div>
+
+            <div class="sidebar__footer">
+                <a href="#" class="sidebar__link sidebar__link--danger">
+                    <i data-lucide="log-out"></i> Cerrar Sesión
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <section id="vistaCalendario" class="view view--active">
+                <header class="main-header">
+                    <h2 class="main-header__title">
+                        <i data-lucide="layout-grid"></i> Calendario
+                    </h2>
+                    <div class="main-header__actions">
+                        <button class="btn btn--primary" id="btnNuevoTurno">
+                            <i data-lucide="plus"></i> Nuevo Turno
+                        </button>
+                    </div>
+                </header>
+                <div id="calendar-container" class="calendar-wrapper">
+                    <div id="calendar"></div>
+                </div>
+            </section>
+
+            <section id="vistaPacientes" class="view">
+                <header class="main-header">
+                    <h2 class="main-header__title">
+                        <i data-lucide="users"></i> Pacientes
+                    </h2>
+                    <div class="main-header__actions">
+                        <button class="btn btn--primary" id="btnNuevoPaciente">
+                            <i data-lucide="plus"></i> Nuevo Paciente
+                        </button>
+                    </div>
+                </header>
+                
+                <div class="content-wrapper">
+                    <div class="search-bar">
+                        <i data-lucide="search" class="search-bar__icon"></i>
+                        <input type="search" class="search-bar__input" id="busquedaTablaPacientes" placeholder="Buscar por nombre o email...">
+                    </div>
+
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Notas</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaPacientesBody">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="vistaHorarios" class="view">
+                <header class="main-header">
+                    <h2 class="main-header__title">
+                        <i data-lucide="clock"></i> Horarios de Atención
+                    </h2>
+                </header>
+                
+                <div class="content-wrapper">
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Día</th>
+                                    <th>Horarios</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaHorariosBody">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <dialog id="modalNuevoTurno" class="modal">
+        <div class="modal__container">
+            <h3 class="modal__title" id="modalTurnoTitulo">Nuevo Turno</h3>
+            
+            <form id="formNuevoTurno" class="form">
+                <input type="hidden" id="turnoId" name="turnoId">
+
+                <div class="form__group combobox" id="comboboxPacientes">
+                    <label class="form__label" for="busquedaPaciente">Nombre del Paciente</label>
+                    <div class="combobox__input-wrapper">
+                        <input type="search" class="form__input" id="busquedaPaciente" placeholder="Buscar paciente..." autocomplete="off">
+                        <i data-lucide="search" class="combobox__icon"></i>
+                    </div>
+                    <ul class="combobox__results" id="listaResultadosPacientes"></ul>
+                </div>
+                
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label" for="fechaTurno">Fecha</label>
+                        <input class="form__input" type="date" id="fechaTurno" name="fechaTurno" required>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="estadoTurno">Estado</label>
+                        <select class="form__input" id="estadoTurno" name="estadoTurno">
+                            <option value="Programado" selected>Programado</option>
+                            <option value="Completado">Completado</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label" for="horaInicio">Inicio</label>
+                        <input class="form__input" type="time" id="horaInicio" name="horaInicio" required>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="horaFin">Fin</label>
+                        <input class="form__input" type="time" id="horaFin" name="horaFin" required>
+                    </div>
+                </div>
+
+                <div class="form__group">
+                    <label class="form__label" for="notasTurno">Notas</label>
+                    <textarea class="form__input form__textarea" id="notasTurno" name="notasTurno" placeholder="Detalles de la sesión..."></textarea>
+                </div>
+
+                <div class="modal__actions" style="justify-content: space-between;">
+                    <button type="button" id="btnEliminarTurno" class="btn" style="background-color: var(--color-danger); color: white; display: none;">Eliminar</button>
+                    
+                    <div style="display: flex; gap: 12px;">
+                        <button type="button" id="btnCancelarTurno" class="btn btn--secondary">Cancelar</button>
+                        <button type="submit" class="btn btn--primary">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog id="modalNuevoPaciente" class="modal">
+        <div class="modal__container">
+            <h3 class="modal__title" id="modalPacienteTitulo">Nuevo Paciente</h3>
+            
+            <form id="formNuevoPaciente" class="form">
+                <input type="hidden" id="pacienteId" name="pacienteId">
+
+                <div class="form__group">
+                    <label class="form__label" for="nombrePaciente">Nombre Completo</label>
+                    <div class="input-with-icon">
+                        <i data-lucide="user"></i>
+                        <input class="form__input" type="text" id="nombrePaciente" name="nombrePaciente" required>
+                    </div>
+                </div>
+                
+                <div class="form__group">
+                    <label class="form__label" for="emailPaciente">Email</label>
+                    <div class="input-with-icon">
+                        <i data-lucide="mail"></i>
+                        <input class="form__input" type="email" id="emailPaciente" name="emailPaciente">
+                    </div>
+                </div>
+
+                <div class="form__group">
+                    <label class="form__label" for="telefonoPaciente">Teléfono</label>
+                    <div class="input-with-icon">
+                        <i data-lucide="phone"></i>
+                        <input class="form__input" type="tel" id="telefonoPaciente" name="telefonoPaciente">
+                    </div>
+                </div>
+
+                <div class="form__group">
+                    <label class="form__label" for="notasPaciente">Notas</label>
+                    <textarea class="form__input form__textarea" id="notasPaciente" name="notasPaciente"></textarea>
+                </div>
+
+                <div class="modal__actions">
+                    <button type="button" id="btnCancelarPaciente" class="btn btn--secondary">Cancelar</button>
+                    <button type="submit" class="btn btn--primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog id="modalEditarHorario" class="modal">
+        <div class="modal__container">
+            <h3 class="modal__title">Editar Horario: <span id="diaEditarNombre"></span></h3>
+            
+            <form id="formEditarHorario" class="form">
+                <input type="hidden" id="diaEditarId" name="diaEditarId">
+                
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label" for="horaInicioHorario">Hora Inicio</label>
+                        <input class="form__input" type="time" id="horaInicioHorario" name="horaInicioHorario" required>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="horaFinHorario">Hora Fin</label>
+                        <input class="form__input" type="time" id="horaFinHorario" name="horaFinHorario" required>
+                    </div>
+                </div>
+
+                <div class="modal__actions">
+                    <button type="button" id="btnCancelarHorario" class="btn btn--secondary">Cancelar</button>
+                    <button type="submit" class="btn btn--primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+</body>
+</html>
