@@ -130,22 +130,17 @@ const UI = {
         const container = document.getElementById('toast-container');
         if (!container) return;
 
-        // Crear el elemento visual
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
         
-        // Asignar un icono visual dependiendo si es error o éxito
         const icon = type === 'error' ? '⚠️' : '✅';
 
         toast.innerHTML = `<span class="toast-icon">${icon}</span> <span>${message}</span>`;
         
-        // Agregarlo a la pantalla
         container.appendChild(toast);
 
-        // Hacer que desaparezca solo después de 3.5 segundos
         setTimeout(() => {
             toast.classList.add('fade-out');
-            // Eliminarlo del HTML una vez termine la animación de salida
             toast.addEventListener('animationend', () => toast.remove());
         }, 3500);
     },
