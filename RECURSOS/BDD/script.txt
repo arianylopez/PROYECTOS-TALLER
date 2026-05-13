@@ -1,0 +1,52 @@
+SET search_path TO ecommerce;
+
+-- 1. TABLA DE PRODUCTOS (Para HU-01 y HU-02)
+create table ecommerce.products (
+  id uuid default gen_random_uuid() primary key, -- Identificador único universal
+  name text not null,                            -- Nombre del producto
+  description text,                              -- Detalle para HU-02 [cite: 58]
+  price numeric not null check (price >= 0),     -- Precio (numeric evita errores de redondeo de dinero)
+  stock int not null default 0 check (stock >= 0), -- Stock real. Si es 0, se mostrará "Agotado" 
+  image_url text,                                -- URL de la foto para HU-01 
+  created_at timestamp with time zone default now()
+);
+
+-- 2. TABLA DE CARRITO (Para HU-03)
+-- Relaciona un usuario con un producto
+create table ecommerce.cart_items (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid references auth.users not null,   -- Vincula con el sistema de usuarios de Supabase
+  product_id uuid references ecommerce.products(id) not null, -- Relación con la tabla productos
+  quantity int not null default 1 check (quantity > 0), -- Cantidad a comprar
+  added_at timestamp with time zone default now(), -- Importante para calcular los 15 min de reserva 
+  
+  -- Restricción: Un usuario no debería tener dos filas para el mismo producto en el carrito,
+  -- mejor actualizar la cantidad de la fila existente.
+  unique(user_id, product_id)
+);
+
+-- 3. SEGURIDAD (Row Level Security - RLS)
+-- Esto es vital en Supabase. Por defecto, todo es privado.
+
+-- Habilitar seguridad en las tablas
+alter table ecommerce.products enable row level security;
+alter table ecommerce.cart_items enable row level security;
+
+-- POLÍTICAS:
+
+-- A. Productos: Todo el mundo (público) puede VER el catálogo (HU-01)
+create policy "Productos visibles para todos"
+on ecommerce.products for select
+using ( true );
+
+-- B. Productos: Solo administradores pueden crear/editar (HU-08, HU-09 futuras)
+-- Por ahora, permitiremos insertar si eres un usuario autenticado para que puedas probar,
+-- pero esto se debe restringir luego.
+create policy "Permitir insertar productos temporalmente"
+on ecommerce.products for insert
+with check ( auth.role() = 'authenticated' );
+
+-- C. Carrito: Los usuarios solo pueden ver y modificar SU propio carrito (HU-03)
+create policy "Usuario ve su propio carrito"
+on ecommerce.cart_items for all
+using ( auth.uid() = user_id );

@@ -1,7 +1,11 @@
-const SUPABASE_URL = 'https://qunivqhppodjksylxlyz.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_VIcOqhfXIAJXqxtJ6M5feQ_zfyIQ_G4';
+const SUPABASE_URL = 'https://nsolqqdidnmxdwhfsjrc.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_r3vbAgwryz-wEJ64MIuNAw_xNxDYuXm';
 
-const clienteSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const clienteSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  db: {
+    schema: 'ecommerce'
+  }
+});
 
 const API = {
     async getProducts() {
