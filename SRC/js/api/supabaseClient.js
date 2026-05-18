@@ -19,7 +19,7 @@ const API = {
             return data;
         } catch (error) {
             console.error("Error al obtener productos:", error);
-            return [];
+            throw error; 
         }
     }
 };

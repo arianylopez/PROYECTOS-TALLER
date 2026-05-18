@@ -1,0 +1,33 @@
+{
+  "name": "proyectos-taller",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arianylopez/PROYECTOS-TALLER.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/arianylopez/PROYECTOS-TALLER/issues"
+  },
+  "homepage": "https://github.com/arianylopez/PROYECTOS-TALLER#readme",
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "SRC/js/**/*.js"
+    ]
+  }
+}

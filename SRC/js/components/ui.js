@@ -5,6 +5,11 @@ const UI = {
         const container = document.getElementById('catalog-container');
         container.innerHTML = ''; 
 
+        if (products.length === 0) {
+            container.innerHTML = '<p style="text-align:center; width:100%; grid-column: 1 / -1; color: #6b7280; font-size: 1.1rem;">Aún no hay productos disponibles</p>';
+            return;
+        }
+
         for (let i = 0; i < products.length; i++) {
             const product = products[i];
             const card = document.createElement('div');
@@ -41,7 +46,13 @@ const UI = {
         document.getElementById('detail-name').textContent = p.name;
         document.getElementById('detail-price').textContent = `Bs. ${p.price.toFixed(2)}`;
         document.getElementById('detail-description').textContent = p.description || 'Sin descripción detallada.';
-        document.getElementById('detail-stock').textContent = p.stock;
+        
+        const stockContainer = document.querySelector('.stock-info');
+        if (p.stock === 1) {
+            stockContainer.innerHTML = `<span id="detail-stock">1</span> disponibles <span style="color: var(--primary-color); font-weight: bold; margin-left: 8px;">¡Última unidad disponible!</span>`;
+        } else {
+            stockContainer.innerHTML = `<span id="detail-stock">${p.stock}</span> disponibles`;
+        }
 
         const qtyInput = document.getElementById('detail-quantity');
         const btnAdd = document.getElementById('btn-add-detail');
@@ -62,11 +73,32 @@ const UI = {
             btnPlus.disabled = (p.stock <= 1); 
 
             btnAdd.onclick = () => {
+                btnAdd.disabled = true; 
+                
                 const qty = parseInt(qtyInput.value);
                 CartService.addToCart(p.id, globalProducts, qty);
                 UI.toggleCart(); 
+                
+                setTimeout(() => {
+                    btnAdd.disabled = false;
+                }, 800);
             };
         }
+    },
+
+    validateManualQuantity() {
+        const input = document.getElementById('detail-quantity');
+        let val = parseInt(input.value);
+        const maxStock = this.currentDetailProduct.stock;
+
+        if (isNaN(val) || val < 1) {
+            input.value = 1;
+        } else if (val > maxStock) {
+            input.value = maxStock;
+        }
+
+        document.getElementById('btn-minus').disabled = (parseInt(input.value) <= 1);
+        document.getElementById('btn-plus').disabled = (parseInt(input.value) >= maxStock);
     },
 
     showCatalog() {
@@ -126,6 +158,7 @@ const UI = {
         countSpan.textContent = totalItems;
         totalSpan.textContent = CartService.getTotal().toFixed(2);
     },
+
     showToast(message, type = 'error') {
         const container = document.getElementById('toast-container');
         if (!container) return;

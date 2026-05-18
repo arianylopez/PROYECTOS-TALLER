@@ -60,7 +60,7 @@
                 <div class="add-to-cart-row">
                     <div class="quantity-selector">
                         <button id="btn-minus" onclick="UI.updateQuantity(-1)">−</button>
-                        <input type="number" id="detail-quantity" value="1" readonly>
+                        <input type="number" id="detail-quantity" value="1" onchange="UI.validateManualQuantity()" onkeyup="UI.validateManualQuantity()">
                         <button id="btn-plus" onclick="UI.updateQuantity(1)">+</button>
                     </div>
                     <button id="btn-add-detail" class="btn-primary" style="margin-top: 0; width: 100%;">🛒 Agregar al Carrito</button>

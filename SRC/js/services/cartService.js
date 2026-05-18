@@ -31,3 +31,7 @@ const CartService = {
         return this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     }
 };
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = CartService;
+}
