@@ -1,7 +1,13 @@
 const { createClient } = supabase;
-const supabaseUrl = 'https://hxkpieimehhfiwoucwhk.supabase.co';
-const supabaseKey = 'sb_publishable_UXlAmeHYcClyM3BlcbVTXQ_3DRRIZzy';
-const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
+const supabaseUrl = 'https://nsolqqdidnmxdwhfsjrc.supabase.co';
+const supabaseKey = 'sb_publishable_r3vbAgwryz-wEJ64MIuNAw_xNxDYuXm';
+
+const supabaseClient = createClient(supabaseUrl, supabaseKey, {
+  db: {
+    schema: 'psicologo'
+  }
+});
 
 lucide.createIcons();
 
