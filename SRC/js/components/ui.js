@@ -178,3 +178,7 @@ const UI = {
         }, 3500);
     },
 };
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = UI;
+}
