@@ -302,13 +302,14 @@ var assemblies = [
       { "name": "HotelReservaAPI.Repositories.ServicioRepository", "rp": "HotelReservaAPI.dll_ServicioRepository.html", "cl": 0, "ucl": 16, "cal": 16, "tl": 34, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "HotelReservaAPI.Services.EstadiaService", "rp": "HotelReservaAPI.dll_EstadiaService.html", "cl": 0, "ucl": 103, "cal": 103, "tl": 152, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "HotelReservaAPI.Services.HabitacionService", "rp": "HotelReservaAPI.dll_HabitacionService.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 26, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Services.HuespedService", "rp": "HotelReservaAPI.dll_HuespedService.html", "cl": 20, "ucl": 26, "cal": 46, "tl": 77, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Services.HuespedService", "rp": "HotelReservaAPI.dll_HuespedService.html", "cl": 26, "ucl": 20, "cal": 46, "tl": 77, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "HotelReservaAPI.Services.ServicioService", "rp": "HotelReservaAPI.dll_ServicioService.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
   {
     "name": "PruebasHotel.dll",
     "classes": [
-      { "name": "HotelReservaAPI.Tests.HuespedServiceTests", "rp": "PruebasHotel.dll_HuespedServiceTests.html", "cl": 45, "ucl": 0, "cal": 45, "tl": 93, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Tests.DummyTest", "rp": "PruebasHotel.dll_DummyTest.html", "cl": 3, "ucl": 1, "cal": 4, "tl": 88, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Tests.HuespedServiceTests", "rp": "PruebasHotel.dll_HuespedServiceTests.html", "cl": 40, "ucl": 0, "cal": 40, "tl": 88, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
