@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1779197750421" clover="3.2.0">
-  <project timestamp="1779197750422" name="All files">
+<coverage generated="1779529337055" clover="3.2.0">
+  <project timestamp="1779529337055" name="All files">
     <metrics statements="140" coveredstatements="107" conditionals="48" coveredconditionals="35" methods="23" coveredmethods="16" elements="211" coveredelements="158" complexity="0" loc="140" ncloc="140" packages="4" files="4" classes="4"/>
     <package name="js">
       <metrics statements="10" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="app.js" path="C:\Users\arian\OneDrive\Documentos\UCB\5TO SEMESTRE\TALLER DE DISEÑO DE SOFTWARE 1\PROYECTOS-TALLER\SRC\js\app.js">
+      <file name="app.js" path="C:\Users\arian\OneDrive\Documentos\UCB\5TO SEMESTRE\TALLER DE DISEÑO DE SOFTWARE 1\PROYECTOS-COMPLETOS\ECOMMERCE\PROYECTOS-TALLER\SRC\js\app.js">
         <metrics statements="10" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -20,7 +20,7 @@
     </package>
     <package name="js.api">
       <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="supabaseClient.js" path="C:\Users\arian\OneDrive\Documentos\UCB\5TO SEMESTRE\TALLER DE DISEÑO DE SOFTWARE 1\PROYECTOS-TALLER\SRC\js\api\supabaseClient.js">
+      <file name="supabaseClient.js" path="C:\Users\arian\OneDrive\Documentos\UCB\5TO SEMESTRE\TALLER DE DISEÑO DE SOFTWARE 1\PROYECTOS-COMPLETOS\ECOMMERCE\PROYECTOS-TALLER\SRC\js\api\supabaseClient.js">
         <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -36,7 +36,7 @@
     </package>
     <package name="js.components">
       <metrics statements="103" coveredstatements="93" conditionals="31" coveredconditionals="24" methods="14" coveredmethods="11"/>
-      <file name="ui.js" path="C:\Users\arian\OneDrive\Documentos\UCB\5TO SEMESTRE\TALLER DE DISEÑO DE SOFTWARE 1\PROYECTOS-TALLER\SRC\js\components\ui.js">
+      <file name="ui.js" path="C:\Users\arian\OneDrive\Documentos\UCB\5TO SEMESTRE\TALLER DE DISEÑO DE SOFTWARE 1\PROYECTOS-COMPLETOS\ECOMMERCE\PROYECTOS-TALLER\SRC\js\components\ui.js">
         <metrics statements="103" coveredstatements="93" conditionals="31" coveredconditionals="24" methods="14" coveredmethods="11"/>
         <line num="1" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
@@ -145,7 +145,7 @@
     </package>
     <package name="js.services">
       <metrics statements="17" coveredstatements="14" conditionals="15" coveredconditionals="11" methods="7" coveredmethods="5"/>
-      <file name="cartService.js" path="C:\Users\arian\OneDrive\Documentos\UCB\5TO SEMESTRE\TALLER DE DISEÑO DE SOFTWARE 1\PROYECTOS-TALLER\SRC\js\services\cartService.js">
+      <file name="cartService.js" path="C:\Users\arian\OneDrive\Documentos\UCB\5TO SEMESTRE\TALLER DE DISEÑO DE SOFTWARE 1\PROYECTOS-COMPLETOS\ECOMMERCE\PROYECTOS-TALLER\SRC\js\services\cartService.js">
         <metrics statements="17" coveredstatements="14" conditionals="15" coveredconditionals="11" methods="7" coveredmethods="5"/>
         <line num="1" count="1" type="stmt"/>
         <line num="5" count="8" type="stmt"/>
