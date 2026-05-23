@@ -26,7 +26,7 @@ namespace HotelReservaAPI.Services
             var existente = _huespedRepository.ObtenerPorDocumento(huesped.DocumentoIdentidad);
             if (existente != null)
             {
-                throw new Exception("Ya existe un huésped registrado con este documento.");
+                throw new InvalidOperationException("Ya existe un huésped registrado con este documento.");
             }
 
             huesped.FechaRegistro = DateTime.Now.Date;

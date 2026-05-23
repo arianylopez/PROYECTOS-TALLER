@@ -4,7 +4,7 @@ using HotelReservaAPI.Repositories;
 
 namespace HotelReservaAPI.Services
 {
-    public class ServicioService : IServicioService
+    internal class ServicioService : IServicioService
     {
         private readonly IServicioRepository _servicioRepository;
 

@@ -27,12 +27,12 @@ namespace HotelReservaAPI.Controllers
                 var huespedes = _huespedService.ObtenerTodos();
                 var huespedesDTO = huespedes.Select(h => MapearAModeloDTO(h)).ToList();
                 return Ok(huespedesDTO);
+            } catch (InvalidOperationException ex) {
+                return Conflict(ex.Message);
+            } catch (ArgumentException ex) {
+                return BadRequest(ex.Message); 
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+}
 
         [HttpPost]
         public ActionResult<HuespedDTO> RegistrarHuesped([FromBody] HuespedDTO huespedDTO)
@@ -43,7 +43,11 @@ namespace HotelReservaAPI.Controllers
                 var registrado = _huespedService.RegistrarHuesped(huesped);
                 return Ok(MapearAModeloDTO(registrado));
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
+            catch (ArgumentException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -58,7 +62,11 @@ namespace HotelReservaAPI.Controllers
                 var actualizado = _huespedService.ActualizarHuesped(id, huesped);
                 return Ok(MapearAModeloDTO(actualizado));
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
+            catch (ArgumentException ex)
             {
                 return BadRequest(ex.Message);
             }

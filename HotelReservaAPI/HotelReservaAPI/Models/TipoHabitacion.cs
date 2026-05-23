@@ -8,13 +8,13 @@ namespace HotelReservaAPI.Models
     public class TipoHabitacion : BaseModel
     {
         [PrimaryKey("tipo_habitacion_id", false)]
-        public string TipoHabitacionId { get; set; }
+        public required string TipoHabitacionId { get; set; }
 
         [Column("nombre")]
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
 
         [Column("descripcion")]
-        public string Descripcion { get; set; }
+        public string? Descripcion { get; set; }
 
         [Column("capacidad")]
         public int Capacidad { get; set; }
