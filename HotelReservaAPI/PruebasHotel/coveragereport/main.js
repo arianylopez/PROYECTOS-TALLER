@@ -288,42 +288,100 @@ for (i = 0, l = charts.length; i < l; i++) {
 
 var assemblies = [
   {
-    "name": "HotelReservaAPI.dll",
+    "name": "HotelReservaAPI",
     "classes": [
-      { "name": "HotelReservaAPI.Controllers.EstadiaController", "rp": "HotelReservaAPI.dll_EstadiaController.html", "cl": 0, "ucl": 98, "cal": 98, "tl": 161, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Controllers.HabitacionController", "rp": "HotelReservaAPI.dll_HabitacionController.html", "cl": 0, "ucl": 37, "cal": 37, "tl": 68, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Controllers.HuespedController", "rp": "HotelReservaAPI.dll_HuespedController.html", "cl": 0, "ucl": 59, "cal": 59, "tl": 99, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Controllers.ServicioController", "rp": "HotelReservaAPI.dll_ServicioController.html", "cl": 0, "ucl": 31, "cal": 31, "tl": 56, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Program", "rp": "HotelReservaAPI.dll_Program.html", "cl": 0, "ucl": 47, "cal": 47, "tl": 72, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Repositories.EstadiaRepository", "rp": "HotelReservaAPI.dll_EstadiaRepository.html", "cl": 0, "ucl": 20, "cal": 20, "tl": 41, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Repositories.HabitacionRepository", "rp": "HotelReservaAPI.dll_HabitacionRepository.html", "cl": 0, "ucl": 20, "cal": 20, "tl": 41, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Repositories.HuespedRepository", "rp": "HotelReservaAPI.dll_HuespedRepository.html", "cl": 0, "ucl": 24, "cal": 24, "tl": 47, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Repositories.PoliticaCancelacionRepository", "rp": "HotelReservaAPI.dll_PoliticaCancelacionRepository.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 22, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Repositories.ServicioRepository", "rp": "HotelReservaAPI.dll_ServicioRepository.html", "cl": 0, "ucl": 16, "cal": 16, "tl": 34, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Services.EstadiaService", "rp": "HotelReservaAPI.dll_EstadiaService.html", "cl": 0, "ucl": 103, "cal": 103, "tl": 152, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Services.HabitacionService", "rp": "HotelReservaAPI.dll_HabitacionService.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 26, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Services.HuespedService", "rp": "HotelReservaAPI.dll_HuespedService.html", "cl": 26, "ucl": 20, "cal": 46, "tl": 77, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Services.ServicioService", "rp": "HotelReservaAPI.dll_ServicioService.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-    ]},
-  {
-    "name": "PruebasHotel.dll",
-    "classes": [
-      { "name": "HotelReservaAPI.Tests.DummyTest", "rp": "PruebasHotel.dll_DummyTest.html", "cl": 3, "ucl": 1, "cal": 4, "tl": 88, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Tests.HuespedServiceTests", "rp": "PruebasHotel.dll_HuespedServiceTests.html", "cl": 40, "ucl": 0, "cal": 40, "tl": 88, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Controllers.EstadiaController", "rp": "HotelReservaAPI_EstadiaController.html", "cl": 0, "ucl": 98, "cal": 98, "tl": 161, "cb": 0, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Controllers.HabitacionController", "rp": "HotelReservaAPI_HabitacionController.html", "cl": 0, "ucl": 37, "cal": 37, "tl": 68, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Controllers.HuespedController", "rp": "HotelReservaAPI_HuespedController.html", "cl": 0, "ucl": 66, "cal": 66, "tl": 107, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Controllers.ServicioController", "rp": "HotelReservaAPI_ServicioController.html", "cl": 0, "ucl": 31, "cal": 31, "tl": 56, "cb": 0, "tb": 28, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.DTOs.AreaServicioDTO", "rp": "HotelReservaAPI_AreaServicioDTO.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 11, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.DTOs.AsignacionAreaDTO", "rp": "HotelReservaAPI_AsignacionAreaDTO.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.DTOs.CheckInDTO", "rp": "HotelReservaAPI_CheckInDTO.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 9, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.DTOs.ContactoHotelDTO", "rp": "HotelReservaAPI_ContactoHotelDTO.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 14, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.DTOs.EmpleadoDTO", "rp": "HotelReservaAPI_EmpleadoDTO.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 11, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.DTOs.EstadiaDTO", "rp": "HotelReservaAPI_EstadiaDTO.html", "cl": 0, "ucl": 14, "cal": 14, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.DTOs.EstadiaHuespedDTO", "rp": "HotelReservaAPI_EstadiaHuespedDTO.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 9, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.DTOs.HabitacionDTO", "rp": "HotelReservaAPI_HabitacionDTO.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 11, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.DTOs.HuespedDTO", "rp": "HotelReservaAPI_HuespedDTO.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 18, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.DTOs.PoliticaCancelacionDTO", "rp": "HotelReservaAPI_PoliticaCancelacionDTO.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 11, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.DTOs.TipoHabitacionDTO", "rp": "HotelReservaAPI_TipoHabitacionDTO.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 14, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Models.AreaServicio", "rp": "HotelReservaAPI_AreaServicio.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Models.AsignacionArea", "rp": "HotelReservaAPI_AsignacionArea.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Models.Empleado", "rp": "HotelReservaAPI_Empleado.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Models.Estadia", "rp": "HotelReservaAPI_Estadia.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 49, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Models.EstadiaHuesped", "rp": "HotelReservaAPI_EstadiaHuesped.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 18, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Models.Habitacion", "rp": "HotelReservaAPI_Habitacion.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Models.Huesped", "rp": "HotelReservaAPI_Huesped.html", "cl": 4, "ucl": 6, "cal": 10, "tl": 40, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Models.PoliticaCancelacion", "rp": "HotelReservaAPI_PoliticaCancelacion.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Models.TipoHabitacion", "rp": "HotelReservaAPI_TipoHabitacion.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 28, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Program", "rp": "HotelReservaAPI_Program.html", "cl": 0, "ucl": 47, "cal": 47, "tl": 72, "cb": 0, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Repositories.EstadiaRepository", "rp": "HotelReservaAPI_EstadiaRepository.html", "cl": 0, "ucl": 20, "cal": 20, "tl": 41, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Repositories.HabitacionRepository", "rp": "HotelReservaAPI_HabitacionRepository.html", "cl": 0, "ucl": 20, "cal": 20, "tl": 41, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Repositories.HuespedRepository", "rp": "HotelReservaAPI_HuespedRepository.html", "cl": 0, "ucl": 24, "cal": 24, "tl": 47, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Repositories.PoliticaCancelacionRepository", "rp": "HotelReservaAPI_PoliticaCancelacionRepository.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 22, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Repositories.ServicioRepository", "rp": "HotelReservaAPI_ServicioRepository.html", "cl": 0, "ucl": 16, "cal": 16, "tl": 34, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Services.EstadiaService", "rp": "HotelReservaAPI_EstadiaService.html", "cl": 0, "ucl": 103, "cal": 103, "tl": 152, "cb": 0, "tb": 50, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Services.HabitacionService", "rp": "HotelReservaAPI_HabitacionService.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 26, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Services.HuespedService", "rp": "HotelReservaAPI_HuespedService.html", "cl": 20, "ucl": 26, "cal": 46, "tl": 77, "cb": 8, "tb": 14, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Services.ServicioService", "rp": "HotelReservaAPI_ServicioService.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
-var metrics = [{ "name": "Blocks covered", "abbreviation": "cb", "explanationUrl": "https://en.wikipedia.org/wiki/Code_coverage" }, { "name": "Blocks not covered", "abbreviation": "ub", "explanationUrl": "https://en.wikipedia.org/wiki/Code_coverage" }];
+var metrics = [{ "name": "Crap Score", "abbreviation": "crp", "explanationUrl": "https://googletesting.blogspot.de/2011/02/this-code-is-crap.html" }, { "name": "Cyclomatic complexity", "abbreviation": "cc", "explanationUrl": "https://en.wikipedia.org/wiki/Cyclomatic_complexity" }, { "name": "Line coverage", "abbreviation": "cov", "explanationUrl": "https://en.wikipedia.org/wiki/Code_coverage" }, { "name": "Branch coverage", "abbreviation": "bcov", "explanationUrl": "https://en.wikipedia.org/wiki/Code_coverage" }];
 
 var historicCoverageExecutionTimes = [];
 
 var riskHotspotMetrics = [
+      { "name": "Crap Score", "explanationUrl": "https://googletesting.blogspot.de/2011/02/this-code-is-crap.html" },
+      { "name": "Cyclomatic complexity", "explanationUrl": "https://en.wikipedia.org/wiki/Cyclomatic_complexity" },
 ];
 
 var riskHotspots = [
+  {
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Controllers.ServicioController", "reportPath": "HotelReservaAPI_ServicioController.html", "methodName": "ObtenerContactos()", "methodShortName": "ObtenerContactos()", "fileIndex": 0, "line": 23,
+    "metrics": [
+      { "value": 812, "exceeded": true },
+      { "value": 28, "exceeded": true },
+    ]},
+  {
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "CrearReserva(HotelReservaAPI.Models.Estadia)", "methodShortName": "CrearReserva(...)", "fileIndex": 0, "line": 30,
+    "metrics": [
+      { "value": 272, "exceeded": true },
+      { "value": 16, "exceeded": true },
+    ]},
+  {
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "RegistrarCheckIn(System.String,System.Collections.Generic.List\u00601\u003CSystem.String\u003E)", "methodShortName": "RegistrarCheckIn(...)", "fileIndex": 0, "line": 73,
+    "metrics": [
+      { "value": 272, "exceeded": true },
+      { "value": 16, "exceeded": true },
+    ]},
+  {
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "CancelarReserva(System.String)", "methodShortName": "CancelarReserva(...)", "fileIndex": 0, "line": 131,
+    "metrics": [
+      { "value": 110, "exceeded": true },
+      { "value": 10, "exceeded": false },
+    ]},
+  {
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Program", "reportPath": "HotelReservaAPI_Program.html", "methodName": "Main(System.String[])", "methodShortName": "Main(...)", "fileIndex": 0, "line": 10,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
+  {
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "RegistrarCheckOut(System.String)", "methodShortName": "RegistrarCheckOut(...)", "fileIndex": 0, "line": 110,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
+  {
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.HuespedService", "reportPath": "HotelReservaAPI_HuespedService.html", "methodName": "ActualizarHuesped(System.String,HotelReservaAPI.Models.Huesped)", "methodShortName": "ActualizarHuesped(...)", "fileIndex": 0, "line": 37,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
 ];
 
-var branchCoverageAvailable = false;
+var branchCoverageAvailable = true;
 var methodCoverageAvailable = false;
 var applyQueryStringToAllLinks = false;
 var applyMaximumGroupingLevel = false;

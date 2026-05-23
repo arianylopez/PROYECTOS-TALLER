@@ -28,6 +28,9 @@ namespace HotelReservaAPI.Services
 
         public Estadia CrearReserva(Estadia estadia)
         {
+            if (estadia == null)
+                throw new ArgumentNullException(nameof(estadia), "La reserva no puede ser nula.");
+
             if (estadia.FechaSalida <= estadia.FechaIngreso)
                 throw new ArgumentException("La fecha de salida debe ser posterior a la fecha de ingreso.");
 
@@ -81,7 +84,7 @@ namespace HotelReservaAPI.Services
             reserva.FechaHoraCheckin = DateTime.Now;
             _estadiaRepository.Actualizar(reserva);
 
-            if (acompanantesIds != null && acompanantesIds.Any())
+            if (acompanantesIds != null && acompanantesIds.Count > 0)
             {
                 foreach (var huespedId in acompanantesIds)
                 {
