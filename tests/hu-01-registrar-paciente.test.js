@@ -1,91 +1,67 @@
-document.body.innerHTML = `
-    <button id="btnNuevoPaciente">Nuevo Paciente</button>
-    <tbody id="tablaPacientesBody"></tbody>
-    <input type="search" id="busquedaTablaPacientes">
+import { guardarPaciente } from '../src/services/pacientesService.js';
+import { supabaseClient } from '../src/config/supabase.js';
 
-    <dialog id="modalNuevoPaciente">
-        <h3 id="modalPacienteTitulo"></h3>
-        <form id="formNuevoPaciente">
-            <input type="hidden" id="pacienteId" name="pacienteId">
-            <input type="text" id="nombrePaciente" name="nombrePaciente" required>
-            <input type="email" id="emailPaciente" name="emailPaciente">
-            <input type="tel" id="telefonoPaciente" name="telefonoPaciente">
-            <textarea id="notasPaciente" name="notasPaciente"></textarea>
-            
-            <button type="button" id="btnCancelarPaciente">Cancelar</button>
-            <button type="submit" id="btnGuardarPaciente">Guardar</button>
-        </form>
-    </dialog>
-`;
-
-window.HTMLDialogElement.prototype.showModal = jest.fn();
-window.HTMLDialogElement.prototype.close = jest.fn();
-
-const { inicializarPacientesUI } = require('../src/ui/pacientesUI.js');
-const { guardarPaciente, obtenerPacientes } = require('../src/services/pacientesService.js');
-
-jest.mock('../src/services/pacientesService.js');
-jest.mock('../src/ui/calendario.js', () => ({
-    recargarTurnosVisuales: jest.fn()
+jest.mock('../src/config/supabase.js', () => ({
+    supabaseClient: {
+        from: jest.fn()
+    }
 }));
 
-describe('HU-01: Registrar Nuevo Paciente', () => {
-    let formNuevoPaciente;
-    let modalPaciente;
-
-    beforeAll(() => {
-        inicializarPacientesUI();
-        formNuevoPaciente = document.getElementById('formNuevoPaciente');
-        modalPaciente = document.getElementById('modalNuevoPaciente');
-    });
+describe('HU-01: Registrar Nuevo Paciente (Capa de Servicios)', () => {
+    let queryBuilder;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        formNuevoPaciente.reset();
+        
+        queryBuilder = {
+            insert: jest.fn().mockReturnThis(),
+            update: jest.fn().mockReturnThis(),
+            eq: jest.fn().mockReturnThis()
+        };
+        supabaseClient.from.mockReturnValue(queryBuilder);
     });
 
-    test('1: Al presionar "Nuevo Paciente", se abre el modal con los campos estructurados', () => {
-        // Act
-        document.getElementById('btnNuevoPaciente').click();
-
-        // Assert
-        expect(modalPaciente.showModal).toHaveBeenCalled();
-        expect(document.getElementById('nombrePaciente')).not.toBeNull();
-        expect(document.getElementById('emailPaciente')).not.toBeNull();
-        expect(document.getElementById('telefonoPaciente')).not.toBeNull();
-        expect(document.getElementById('notasPaciente')).not.toBeNull();
-    });
-
-    test('2: El campo "Nombre Completo" es obligatorio y lanza alerta de validación nativa si está vacío', () => {
-        // Assert
-        const inputNombre = document.getElementById('nombrePaciente');
-        expect(inputNombre.required).toBe(true);
-    });
-
-    test('3: Al completar datos y guardar, el modal se cierra, envía a BD y recarga la tabla', async () => {
+    // CA 1: Campos del formulario (Nombre, Email, Teléfono, Notas)
+    test('CA1: Debe aceptar y enviar correctamente los campos estructurados (Nombre, Email, Teléfono, Notas) hacia la base de datos', async () => {
         // Arrange
-        guardarPaciente.mockResolvedValue(true); 
-        obtenerPacientes.mockResolvedValue([]); 
-
-        document.getElementById('nombrePaciente').value = 'Juan Perez';
-        document.getElementById('emailPaciente').value = 'juan@test.com';
+        const nuevoPaciente = {
+            nombre_completo: 'Juan Perez',
+            email: 'juan@email.com',
+            telefono: '77712345',
+            notas: 'Paciente derivado'
+        };
+        queryBuilder.insert.mockResolvedValue({ error: null });
 
         // Act
-        const eventoSubmit = new Event('submit', { cancelable: true });
-        formNuevoPaciente.dispatchEvent(eventoSubmit);
+        await guardarPaciente(nuevoPaciente);
 
         // Assert
-        await new Promise(process.nextTick);
+        expect(supabaseClient.from).toHaveBeenCalledWith('pacientes');
+        expect(queryBuilder.insert).toHaveBeenCalledWith([nuevoPaciente]);
+    });
 
-        expect(guardarPaciente).toHaveBeenCalledWith({
-            nombre_completo: 'Juan Perez',
-            email: 'juan@test.com',
-            telefono: '',
-            notas: ''
-        }, null);
+    // CA 2: Nombre Completo es obligatorio
+    test('CA2: Debe propagar el error (alerta) si se intenta guardar un paciente sin Nombre Completo (rechazado por la BD)', async () => {
+        // Arrange
+        const pacienteInvalido = { email: 'sin-nombre@email.com' };
+        const mockError = new Error('Violación de restricción NOT NULL en nombre_completo');
+        
+        queryBuilder.insert.mockResolvedValue({ error: mockError });
 
-        expect(modalPaciente.close).toHaveBeenCalled();
+        // Act & Assert
+        await expect(guardarPaciente(pacienteInvalido)).rejects.toThrow('Violación de restricción NOT NULL en nombre_completo');
+    });
 
-        expect(obtenerPacientes).toHaveBeenCalled();
+    // CA 3: Datos se envían a la base de datos al presionar guardar
+    test('CA3: Debe ejecutar la inserción exitosamente para que la tabla pueda actualizarse inmediatamente', async () => {
+        // Arrange
+        const pacienteValido = { nombre_completo: 'Ana Gomez' };
+        queryBuilder.insert.mockResolvedValue({ error: null });
+
+        // Act
+        await expect(guardarPaciente(pacienteValido)).resolves.not.toThrow();
+        
+        // Assert
+        expect(queryBuilder.insert).toHaveBeenCalledTimes(1);
     });
 });

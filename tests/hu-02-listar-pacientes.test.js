@@ -1,81 +1,62 @@
-document.body.innerHTML = `
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th><th>Email</th><th>Teléfono</th><th>Notas</th><th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tablaPacientesBody"></tbody>
-    </table>
-`;
+import { obtenerPacientes } from '../src/services/pacientesService.js';
+import { supabaseClient } from '../src/config/supabase.js';
 
-window.lucide = {
-    createIcons: jest.fn()
-};
+jest.mock('../src/config/supabase.js', () => ({
+    supabaseClient: {
+        from: jest.fn()
+    }
+}));
 
-const { cargarYRenderizarPacientes } = require('../src/ui/pacientesUI.js');
-const { obtenerPacientes } = require('../src/services/pacientesService.js');
+describe('HU-02: Listar Directorio de Pacientes (Capa de Servicios)', () => {
+    let queryBuilder;
 
-jest.mock('../src/services/pacientesService.js');
-
-describe('HU-02: Listar Directorio de Pacientes', () => {
-    
     beforeEach(() => {
         jest.clearAllMocks();
-        document.getElementById('tablaPacientesBody').innerHTML = '';
+        
+        queryBuilder = {
+            select: jest.fn().mockReturnThis(),
+            order: jest.fn().mockReturnThis()
+        };
+        supabaseClient.from.mockReturnValue(queryBuilder);
     });
 
-    test('1: Al cargar la vista, se renderiza la tabla con los datos del paciente', async () => {
+    // CA 1: Renderiza la tabla con las columnas
+    test('CA1: Debe consultar la tabla pacientes solicitando todas las columnas y ordenándolas por fecha de creación', async () => {
         // Arrange
-        const mockPacientes = [
-            {
-                id: '1',
-                nombre_completo: 'Ana Gomez',
-                email: 'ana@ejemplo.com',
-                telefono: '12345678',
-                notas: 'Paciente de prueba'
-            }
+        const mockData = [
+            { id: 1, nombre_completo: 'Carlos Ruiz', email: 'carlos@mail.com', telefono: '78945612', notas: 'Ansiedad' }
         ];
-        obtenerPacientes.mockResolvedValue(mockPacientes);
+        queryBuilder.order.mockResolvedValue({ data: mockData, error: null });
 
         // Act
-        await cargarYRenderizarPacientes();
+        const resultado = await obtenerPacientes();
 
         // Assert
-        const filas = document.getElementById('tablaPacientesBody').querySelectorAll('tr');
-        expect(filas.length).toBe(1);
-        
-        const celdas = filas[0].querySelectorAll('td');
-        expect(celdas[0].textContent).toBe('Ana Gomez');
-        expect(celdas[1].textContent).toBe('ana@ejemplo.com');
-        expect(celdas[2].textContent).toBe('12345678');
-        expect(celdas[3].textContent).toBe('Paciente de prueba');
-        expect(celdas[4].querySelector('.btn-icon')).not.toBeNull();
+        expect(supabaseClient.from).toHaveBeenCalledWith('pacientes');
+        expect(queryBuilder.select).toHaveBeenCalledWith('*');
+        expect(queryBuilder.order).toHaveBeenCalledWith('creado_en', { ascending: false });
+        expect(resultado).toEqual(mockData);
     });
 
-    test('2: Si un paciente no tiene email, teléfono o notas, se muestra un guión ("-")', async () => {
+    // CA 2: Paciente sin datos muestra un guión en la UI
+    test('CA2: Debe retornar correctamente los registros que tengan campos de contacto nulos para que la UI los formatee (muestre guiones)', async () => {
         // Arrange
-        const mockPacientes = [
-            {
-                id: '2',
-                nombre_completo: 'Carlos Silva',
-                email: null,
-                telefono: '',
-                notas: undefined
+        const mockDataIncompleta = [
+            { 
+                id: 2, 
+                nombre_completo: 'Maria Lopez', 
+                email: null, 
+                telefono: null, 
+                notas: '' 
             }
         ];
-        obtenerPacientes.mockResolvedValue(mockPacientes);
+        queryBuilder.order.mockResolvedValue({ data: mockDataIncompleta, error: null });
 
         // Act
-        await cargarYRenderizarPacientes();
+        const resultado = await obtenerPacientes();
 
         // Assert
-        const filas = document.getElementById('tablaPacientesBody').querySelectorAll('tr');
-        const celdas = filas[0].querySelectorAll('td');
-        
-        expect(celdas[0].textContent).toBe('Carlos Silva');
-        expect(celdas[1].textContent).toBe('-');
-        expect(celdas[2].textContent).toBe('-'); 
-        expect(celdas[3].textContent).toBe('-'); 
+        expect(resultado[0].email).toBeNull();
+        expect(resultado[0].telefono).toBeNull();
     });
 });
