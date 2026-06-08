@@ -23,7 +23,8 @@ namespace HotelReservaAPI
             var options = new SupabaseOptions
             {
                 AutoRefreshToken = true,
-                AutoConnectRealtime = true
+                AutoConnectRealtime = true,
+                Schema = "hotel"
             };
 
             builder.Services.AddSingleton(provider => new Supabase.Client(supabaseUrl, supabaseKey, options));

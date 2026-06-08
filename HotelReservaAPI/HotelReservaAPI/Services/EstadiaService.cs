@@ -28,18 +28,15 @@ namespace HotelReservaAPI.Services
 
         public Estadia CrearReserva(Estadia estadia)
         {
-            if (estadia == null)
-                throw new ArgumentNullException(nameof(estadia), "La reserva no puede ser nula.");
-
             if (estadia.FechaSalida <= estadia.FechaIngreso)
-                throw new ArgumentException("La fecha de salida debe ser posterior a la fecha de ingreso.");
+                throw new Exception("La fecha de salida debe ser posterior a la fecha de ingreso.");
 
             var habitacion = _habitacionRepository.ObtenerHabitacionPorId(estadia.HabitacionId);
-            if (habitacion == null) throw new ArgumentException("La habitación seleccionada no existe.");
+            if (habitacion == null) throw new Exception("La habitación seleccionada no existe.");
 
             var tipoHabitacion = _habitacionRepository.ObtenerTipoHabitacionPorId(habitacion.TipoHabitacionId);
             if (estadia.CantidadPersonas > tipoHabitacion.Capacidad)
-                throw new ArgumentException("La cantidad de personas supera la capacidad de la habitación.");
+                throw new Exception("La cantidad de personas supera la capacidad de la habitación.");
 
             var reservasExistentes = _estadiaRepository.ObtenerTodas()
                 .Where(r => r.HabitacionId == estadia.HabitacionId && r.Estado != "Cancelada" && r.Estado != "Finalizada")
@@ -48,7 +45,7 @@ namespace HotelReservaAPI.Services
             foreach (var reserva in reservasExistentes)
             {
                 if (estadia.FechaIngreso < reserva.FechaSalida && estadia.FechaSalida > reserva.FechaIngreso)
-                    throw new ArgumentException("La habitación ya está reservada en ese rango de fechas.");
+                    throw new Exception("La habitación ya está reservada en ese rango de fechas.");
             }
 
             estadia.Estado = "Reservada";
@@ -75,16 +72,16 @@ namespace HotelReservaAPI.Services
         public Estadia RegistrarCheckIn(string estadiaId, List<string> acompanantesIds)
         {
             var reserva = _estadiaRepository.ObtenerPorId(estadiaId);
-            if (reserva == null) throw new ArgumentException("La reserva no existe.");
-            if (reserva.Estado == "Cancelada") throw new ArgumentException("No se puede hacer check-in de una reserva cancelada.");
-            if (reserva.Estado == "En curso") throw new ArgumentException("El check-in ya fue realizado anteriormente.");
-            if (reserva.Estado != "Reservada") throw new ArgumentException("Estado inválido para registrar check-in.");
+            if (reserva == null) throw new Exception("La reserva no existe.");
+            if (reserva.Estado == "Cancelada") throw new Exception("No se puede hacer check-in de una reserva cancelada.");
+            if (reserva.Estado == "En curso") throw new Exception("El check-in ya fue realizado anteriormente.");
+            if (reserva.Estado != "Reservada") throw new Exception("Estado inválido para registrar check-in.");
 
             reserva.Estado = "En curso";
             reserva.FechaHoraCheckin = DateTime.Now;
             _estadiaRepository.Actualizar(reserva);
 
-            if (acompanantesIds != null && acompanantesIds.Count > 0)
+            if (acompanantesIds != null && acompanantesIds.Any())
             {
                 foreach (var huespedId in acompanantesIds)
                 {
@@ -112,9 +109,9 @@ namespace HotelReservaAPI.Services
         public Estadia RegistrarCheckOut(string estadiaId)
         {
             var reserva = _estadiaRepository.ObtenerPorId(estadiaId);
-            if (reserva == null) throw new ArgumentException("La reserva no existe.");
+            if (reserva == null) throw new Exception("La reserva no existe.");
 
-            if (reserva.Estado != "En curso") throw new ArgumentException("Solo se puede hacer check-out de una reserva 'En curso'.");
+            if (reserva.Estado != "En curso") throw new Exception("Solo se puede hacer check-out de una reserva 'En curso'.");
 
             reserva.Estado = "Finalizada";
             reserva.FechaHoraCheckout = DateTime.Now;
@@ -133,8 +130,8 @@ namespace HotelReservaAPI.Services
         public Estadia CancelarReserva(string estadiaId)
         {
             var reserva = _estadiaRepository.ObtenerPorId(estadiaId);
-            if (reserva == null) throw new ArgumentException("La reserva no existe.");
-            if (reserva.Estado != "Reservada") throw new ArgumentException("Solo se pueden cancelar reservas en estado 'Reservada'.");
+            if (reserva == null) throw new Exception("La reserva no existe.");
+            if (reserva.Estado != "Reservada") throw new Exception("Solo se pueden cancelar reservas en estado 'Reservada'.");
 
             var politica = _politicaRepository.ObtenerPoliticaActiva();
             var diasAnticipacion = (reserva.FechaIngreso.Date - DateTime.Now.Date).TotalDays;
