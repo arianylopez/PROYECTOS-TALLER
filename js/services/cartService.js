@@ -1,30 +1,55 @@
 const CartService = {
     cart: [],
+    
+    api: {
+        reserveStock: () => {} 
+    },
 
-    addToCart(productId, productsData, quantityToAdd = 1) {
-        const product = productsData.find(p => p.id === productId);
+    addToCart(arg1, arg2, quantityToAdd = 1) {
+        let product;
+        let qty;
+
+        if (typeof arg1 === 'object' && arg1 !== null) {
+            product = arg1;
+            qty = arg2 !== undefined ? arg2 : 1;
+        } else {
+            product = arg2.find(p => p.id === arg1);
+            qty = quantityToAdd;
+        }
+
         if (!product) return;
 
-        const existingItem = this.cart.find(item => item.id === productId);
+        const existingItem = this.cart.find(item => item.id === product.id);
         
         if (existingItem) {
-            if (existingItem.quantity + quantityToAdd <= product.stock) {
-                existingItem.quantity += quantityToAdd;
+            if (existingItem.quantity + qty <= product.stock) {
+                existingItem.quantity += qty;
             } else {
-                UI.showToast("Límite alcanzado: No puedes agregar más unidades del stock.", "error");
+                if (typeof UI !== 'undefined' && UI.showToast) {
+                    UI.showToast("Límite alcanzado: No puedes agregar más unidades del stock.", "error");
+                }
                 return;
             }
         } else {
-            if (product.stock > 0 && quantityToAdd <= product.stock) {
-                this.cart.push({ ...product, quantity: quantityToAdd, added_at: new Date() });
+            if (product.stock > 0 && qty <= product.stock) {
+                this.cart.push({ ...product, quantity: qty, added_at: new Date() });
             }
         }
-        UI.renderCart(this.cart);
+
+        if (this.api && typeof this.api.reserveStock === 'function') {
+            this.api.reserveStock(product.id, qty);
+        }
+
+        if (typeof UI !== 'undefined' && UI.renderCart) {
+            UI.renderCart(this.cart);
+        }
     },
 
     removeFromCart(productId) {
         this.cart = this.cart.filter(item => item.id !== productId);
-        UI.renderCart(this.cart);
+        if (typeof UI !== 'undefined' && UI.renderCart) {
+            UI.renderCart(this.cart);
+        }
     },
 
     getTotal() {
