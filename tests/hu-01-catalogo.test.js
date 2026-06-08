@@ -1,4 +1,4 @@
-const UI = require('../SRC/js/components/ui.js');
+const UI = require('../js/components/ui.js');
 
 describe('HU-01: Ver Catálogo de Productos', () => {
 

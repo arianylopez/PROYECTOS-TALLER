@@ -1,5 +1,5 @@
-const CartService = require('../SRC/js/services/cartService.js');
-const UI = require('../SRC/js/components/ui.js');
+const CartService = require('../js/services/cartService.js');
+const UI = require('../js/components/ui.js');
 
 global.CartService = CartService;
 global.UI = UI;
