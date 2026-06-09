@@ -3,6 +3,9 @@ const UI = {
 
     renderProducts(products) {
         const container = document.getElementById('catalog-container');
+        
+        if (!container) return; 
+
         container.innerHTML = ''; 
 
         if (products.length === 0) {
@@ -177,6 +180,39 @@ const UI = {
             toast.addEventListener('animationend', () => toast.remove());
         }, 3500);
     },
+
+    refreshStockDisplays(product) {
+        if (typeof globalProducts !== 'undefined' && document.getElementById('catalog-container')) {
+            this.renderProducts(globalProducts);
+        }
+
+        if (this.currentDetailProduct && this.currentDetailProduct.id === product.id) {
+            const stockContainer = document.querySelector('.stock-info');
+            const qtyInput = document.getElementById('detail-quantity');
+            const btnAdd = document.getElementById('btn-add-detail');
+            const btnPlus = document.getElementById('btn-plus');
+            const btnMinus = document.getElementById('btn-minus');
+            if (!stockContainer || !qtyInput || !btnAdd) return;
+
+            if (product.stock === 0) {
+                stockContainer.innerHTML = `<span id="detail-stock">0</span> disponibles`;
+                qtyInput.value = 0;
+                btnAdd.textContent = "Agotado";
+                btnAdd.disabled = true;
+                btnPlus.disabled = true;
+                btnMinus.disabled = true;
+            } else {
+                if (product.stock === 1) {
+                    stockContainer.innerHTML = `<span id="detail-stock">1</span> disponibles <span style="color: var(--primary-color); font-weight: bold; margin-left: 8px;">Ultima unidad disponible!</span>`;
+                } else {
+                    stockContainer.innerHTML = `<span id="detail-stock">${product.stock}</span> disponibles`;
+                }
+                qtyInput.value = 1;
+                btnMinus.disabled = true;
+                btnPlus.disabled = (product.stock <= 1);
+            }
+        }
+    }
 };
 
 if (typeof module !== 'undefined' && module.exports) {

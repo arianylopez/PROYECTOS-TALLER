@@ -6,42 +6,37 @@ const CartService = {
     },
 
     addToCart(arg1, arg2, quantityToAdd = 1) {
-        let product;
-        let qty;
-
-        if (typeof arg1 === 'object' && arg1 !== null) {
-            product = arg1;
-            qty = arg2 !== undefined ? arg2 : 1;
-        } else {
-            product = arg2.find(p => p.id === arg1);
-            qty = quantityToAdd;
-        }
+        const isObject = typeof arg1 === 'object' && arg1 !== null;
+        const product = isObject ? arg1 : arg2.find(p => p.id === arg1);
+        const qty = isObject ? (arg2 !== undefined ? arg2 : 1) : quantityToAdd;
 
         if (!product) return;
 
         const existingItem = this.cart.find(item => item.id === product.id);
-        
-        if (existingItem) {
-            if (existingItem.quantity + qty <= product.stock) {
-                existingItem.quantity += qty;
-            } else {
-                if (typeof UI !== 'undefined' && UI.showToast) {
-                    UI.showToast("Límite alcanzado: No puedes agregar más unidades del stock.", "error");
-                }
-                return;
+        const projectedQty = existingItem ? existingItem.quantity + qty : qty;
+
+        if (qty > product.stock) {
+            if (typeof UI !== 'undefined' && UI.showToast) {
+                UI.showToast("Limite alcanzado: No se puede agregar mas unidades del stock", "error");
             }
-        } else {
-            if (product.stock > 0 && qty <= product.stock) {
-                this.cart.push({ ...product, quantity: qty, added_at: new Date() });
-            }
+            return;
         }
+
+        product.stock -= qty;
 
         if (this.api && typeof this.api.reserveStock === 'function') {
             this.api.reserveStock(product.id, qty);
         }
 
-        if (typeof UI !== 'undefined' && UI.renderCart) {
-            UI.renderCart(this.cart);
+        if (existingItem) {
+            existingItem.quantity = projectedQty;
+        } else {
+            this.cart.push({ ...product, quantity: qty, added_at: new Date() });
+        }
+
+        if (typeof UI !== 'undefined') {
+            if (UI.renderCart) UI.renderCart(this.cart);
+            if (UI.refreshStockDisplays) UI.refreshStockDisplays(product);
         }
     },
 

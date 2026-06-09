@@ -1,4 +1,5 @@
 const CartService = require('../js/services/cartService.js');
+global.UI = { renderCart: jest.fn(), showToast: jest.fn() };
 
 describe('HU-04: Reserva temporal', () => {
     beforeEach(() => {
@@ -12,15 +13,16 @@ describe('HU-04: Reserva temporal', () => {
         const quantityToAdd = 1;
         
         CartService.api = {
-            reserveStock: jest.fn().mockResolvedValue(true)
+            reserveStock: jest.fn()
         };
 
         // Act
-        await CartService.addToCart(mockProduct, quantityToAdd);
+        CartService.addToCart(mockProduct, quantityToAdd);
 
         // Assert
         expect(CartService.cart.length).toBe(1);
         expect(CartService.cart[0].id).toBe('prod-123');
+        expect(mockProduct.stock).toBe(9);
         
         expect(CartService.api.reserveStock).toHaveBeenCalledTimes(1);
         expect(CartService.api.reserveStock).toHaveBeenCalledWith('prod-123', quantityToAdd);

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.64% </span>
+                <span class="strong">81.81% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/31</span>
+                <span class='fraction'>27/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.97% </span>
+                <span class="strong">69.23% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>27/37</span>
+                <span class='fraction'>27/39</span>
             </div>
         
             
@@ -119,15 +119,7 @@
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -136,37 +128,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,42 +183,37 @@
     },
 &nbsp;
     addToCart(arg1, arg2, quantityToAdd = 1) {
-        let product;
-        let qty;
-&nbsp;
-        if (typeof arg1 === 'object' &amp;&amp; arg1 !== null) {
-            product = arg1;
-            qty = arg2 !== undefined ? arg2 : <span class="branch-1 cbranch-no" title="branch not covered" >1;</span>
-        } else {
-            product = arg2.find(p =&gt; p.id === arg1);
-            qty = quantityToAdd;
-        }
+        const isObject = typeof arg1 === 'object' &amp;&amp; arg1 !== null;
+        const product = isObject ? arg1 : arg2.find(p =&gt; p.id === arg1);
+        const qty = isObject ? (arg2 !== undefined ? arg2 : <span class="branch-1 cbranch-no" title="branch not covered" >1)</span> : quantityToAdd;
 &nbsp;
         <span class="missing-if-branch" title="if path not taken" >I</span>if (!product) <span class="cstat-no" title="statement not covered" >return;</span>
 &nbsp;
         const existingItem = this.cart.find(item =&gt; item.id === product.id);
-        
-        if (existingItem) {
-            <span class="missing-if-branch" title="if path not taken" >I</span>if (existingItem.quantity + qty &lt;= product.stock) {
-<span class="cstat-no" title="statement not covered" >                existingItem.quantity += qty;</span>
-            } else {
-                <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof UI !== 'undefined' &amp;&amp; UI.showToast) {
-                    UI.showToast("Límite alcanzado: No puedes agregar más unidades del stock.", "error");
-                }
-                return;
+        const projectedQty = existingItem ? existingItem.quantity + qty : qty;
+&nbsp;
+        if (qty &gt; product.stock) {
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof UI !== 'undefined' &amp;&amp; UI.showToast) {
+                UI.showToast("Límite alcanzado: No puedes agregar más unidades del stock.", "error");
             }
-        } else {
-            if (product.stock &gt; 0 &amp;&amp; qty &lt;= product.stock) {
-                this.cart.push({ ...product, quantity: qty, added_at: new Date() });
-            }
+            return;
         }
+&nbsp;
+        product.stock -= qty;
 &nbsp;
         <span class="missing-if-branch" title="else path not taken" >E</span>if (this.api &amp;&amp; typeof this.api.reserveStock === 'function') {
             this.api.reserveStock(product.id, qty);
         }
 &nbsp;
-        if (typeof UI !== 'undefined' &amp;&amp; UI.renderCart) {
-            UI.renderCart(this.cart);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (existingItem) {
+<span class="cstat-no" title="statement not covered" >            existingItem.quantity = projectedQty;</span>
+        } else {
+            this.cart.push({ ...product, quantity: qty, added_at: new Date() });
+        }
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof UI !== 'undefined') {
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (UI.renderCart) UI.renderCart(this.cart);
+            if (UI.refreshStockDisplays) UI.refreshStockDisplays(product);
         }
     },
 &nbsp;
@@ -253,7 +238,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-08T22:41:08.527Z
+                at 2026-06-08T23:03:46.415Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
