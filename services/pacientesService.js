@@ -33,3 +33,28 @@ export async function eliminarPaciente(id) {
         
     if (error) throw error;
 }
+
+export function marcarPacientesInconsistentes(pacientes, turnos) {
+    const pacientesProcesados = [];
+    
+    for (let i = 0; i < pacientes.length; i++) {
+        const paciente = { ...pacientes[i] };
+        let cancelaciones = 0;
+        
+        for (let j = 0; j < turnos.length; j++) {
+            if (turnos[j].paciente_id === paciente.id && turnos[j].estado === 'Cancelado') {
+                cancelaciones++;
+            }
+        }
+        
+        if (cancelaciones >= 2) {
+            paciente.inconsistente = true;
+        } else {
+            paciente.inconsistente = false;
+        }
+        
+        pacientesProcesados.push(paciente);
+    }
+    
+    return pacientesProcesados;
+}
