@@ -1,5 +1,6 @@
-import { obtenerPacientes, guardarPaciente, eliminarPaciente } from '../services/pacientesService.js';
+import { obtenerPacientes, guardarPaciente, eliminarPaciente, marcarPacientesInconsistentes } from '../services/pacientesService.js';
 import { recargarTurnosVisuales } from './calendario.js';
+import { obtenerTurnos } from '../services/turnosService.js'; 
 
 const tablaPacientesBody = document.getElementById('tablaPacientesBody');
 const inputBusquedaTabla = document.getElementById('busquedaTablaPacientes');
@@ -12,10 +13,14 @@ let pacientesGlobal = [];
 
 export async function cargarYRenderizarPacientes() {
     try {
-        pacientesGlobal = await obtenerPacientes();
-        renderizarTablaPacientes(pacientesGlobal);
+        const pacientesData = await obtenerPacientes();
+        const turnosData = await obtenerTurnos(); 
+        
+        const pacientesProcesados = marcarPacientesInconsistentes(pacientesData, turnosData);
+
+        renderizarTablaPacientes(pacientesProcesados);
     } catch (error) {
-        console.error('Error al cargar pacientes:', error);
+        console.error('Error al cargar la vista de pacientes:', error);
     }
 }
 
@@ -25,8 +30,10 @@ function renderizarTablaPacientes(datos) {
     
     datos.forEach(paciente => {
         const tr = document.createElement('tr');
+        const iconoAlerta = paciente.inconsistente ? 
+            '<span title="Múltiples inasistencias detectadas" style="color: #ef4444; font-size: 1.1em; margin-left: 5px; cursor: help;">⚠️</span>' : '';
         tr.innerHTML = `
-            <td>${paciente.nombre_completo}</td>
+            <td>${paciente.nombre_completo} ${iconoAlerta}</td>
             <td>${paciente.email || '-'}</td>
             <td>${paciente.telefono || '-'}</td>
             <td>${paciente.notas || '-'}</td>
