@@ -17,7 +17,7 @@ const CartService = {
 
         if (qty > product.stock) {
             if (typeof UI !== 'undefined' && UI.showToast) {
-                UI.showToast("Limite alcanzado: No se puede agregar mas unidades del stock", "error");
+                UI.showToast("Límite alcanzado: No puedes agregar más unidades del stock.", "error");
             }
             return;
         }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1780959826429" clover="3.2.0">
-  <project timestamp="1780959826430" name="All files">
+<coverage generated="1780965794855" clover="3.2.0">
+  <project timestamp="1780965794855" name="All files">
     <metrics statements="172" coveredstatements="130" conditionals="91" coveredconditionals="65" methods="25" coveredmethods="18" elements="288" coveredelements="213" complexity="0" loc="172" ncloc="172" packages="4" files="4" classes="4"/>
     <package name="js">
       <metrics statements="10" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -148,29 +148,29 @@
         <line num="192" count="1" type="stmt"/>
         <line num="193" count="1" type="stmt"/>
         <line num="194" count="1" type="stmt"/>
-        <line num="196" count="1" type="cond" truecount="4" falsecount="1"/>
-        <line num="198" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="195" count="1" type="cond" truecount="4" falsecount="1"/>
+        <line num="197" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="198" count="0" type="stmt"/>
         <line num="199" count="0" type="stmt"/>
         <line num="200" count="0" type="stmt"/>
         <line num="201" count="0" type="stmt"/>
         <line num="202" count="0" type="stmt"/>
         <line num="203" count="0" type="stmt"/>
-        <line num="204" count="0" type="stmt"/>
-        <line num="206" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="207" count="0" type="stmt"/>
-        <line num="209" count="1" type="stmt"/>
+        <line num="205" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="206" count="0" type="stmt"/>
+        <line num="208" count="1" type="stmt"/>
+        <line num="210" count="1" type="stmt"/>
+        <line num="211" count="1" type="stmt"/>
         <line num="212" count="1" type="stmt"/>
-        <line num="213" count="1" type="stmt"/>
-        <line num="214" count="1" type="stmt"/>
-        <line num="220" count="3" type="cond" truecount="3" falsecount="1"/>
-        <line num="221" count="3" type="stmt"/>
+        <line num="218" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="219" count="3" type="stmt"/>
       </file>
     </package>
     <package name="js.services">
       <metrics statements="26" coveredstatements="22" conditionals="39" coveredconditionals="27" methods="8" coveredmethods="6"/>
       <file name="cartService.js" path="D:\Documents\UCB\5TO SEMESTRE\TALLER DE DISEÑO DE SOFTWARE 1\PROYECTOS-COMPLETOS\ECOMMERCE\PROYECTOS-TALLER\js\services\cartService.js">
         <metrics statements="26" coveredstatements="22" conditionals="39" coveredconditionals="27" methods="8" coveredmethods="6"/>
-        <line num="1" count="2" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
         <line num="9" count="8" type="cond" truecount="2" falsecount="0"/>
         <line num="10" count="8" type="cond" truecount="2" falsecount="0"/>
         <line num="11" count="8" type="cond" truecount="3" falsecount="1"/>
@@ -194,8 +194,8 @@
         <line num="45" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="46" count="0" type="stmt"/>
         <line num="51" count="8" type="stmt"/>
-        <line num="55" count="2" type="cond" truecount="3" falsecount="1"/>
-        <line num="56" count="2" type="stmt"/>
+        <line num="55" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="56" count="3" type="stmt"/>
       </file>
     </package>
   </project>
