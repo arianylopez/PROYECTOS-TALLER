@@ -1,5 +1,7 @@
 const CartService = {
     cart: [],
+    deliveryMethod: 'recojo_tienda',
+    shippingCost: 0,
     
     api: {
         reserveStock: () => {} 
@@ -47,8 +49,22 @@ const CartService = {
         }
     },
 
+    setDeliveryMethod(method) {
+        this.deliveryMethod = method;
+        if (method === 'recojo_tienda') {
+            this.shippingCost = 0;
+        } else if (method === 'domicilio') {
+            this.shippingCost = 20;
+        }
+        
+        if (typeof UI !== 'undefined' && UI.renderCart) {
+            UI.renderCart(this.cart);
+        }
+    },
+
     getTotal() {
-        return this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const subtotal = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        return subtotal + this.shippingCost;
     }
 };
 

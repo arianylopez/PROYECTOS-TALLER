@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1780965794855" clover="3.2.0">
-  <project timestamp="1780965794855" name="All files">
-    <metrics statements="172" coveredstatements="130" conditionals="91" coveredconditionals="65" methods="25" coveredmethods="18" elements="288" coveredelements="213" complexity="0" loc="172" ncloc="172" packages="4" files="4" classes="4"/>
+<coverage generated="1780966344626" clover="3.2.0">
+  <project timestamp="1780966344626" name="All files">
+    <metrics statements="180" coveredstatements="136" conditionals="99" coveredconditionals="69" methods="26" coveredmethods="19" elements="305" coveredelements="224" complexity="0" loc="180" ncloc="180" packages="4" files="4" classes="4"/>
     <package name="js">
       <metrics statements="10" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="app.js" path="D:\Documents\UCB\5TO SEMESTRE\TALLER DE DISEÑO DE SOFTWARE 1\PROYECTOS-COMPLETOS\ECOMMERCE\PROYECTOS-TALLER\js\app.js">
@@ -167,35 +167,43 @@
       </file>
     </package>
     <package name="js.services">
-      <metrics statements="26" coveredstatements="22" conditionals="39" coveredconditionals="27" methods="8" coveredmethods="6"/>
+      <metrics statements="34" coveredstatements="28" conditionals="47" coveredconditionals="31" methods="9" coveredmethods="7"/>
       <file name="cartService.js" path="D:\Documents\UCB\5TO SEMESTRE\TALLER DE DISEÑO DE SOFTWARE 1\PROYECTOS-COMPLETOS\ECOMMERCE\PROYECTOS-TALLER\js\services\cartService.js">
-        <metrics statements="26" coveredstatements="22" conditionals="39" coveredconditionals="27" methods="8" coveredmethods="6"/>
+        <metrics statements="34" coveredstatements="28" conditionals="47" coveredconditionals="31" methods="9" coveredmethods="7"/>
         <line num="1" count="3" type="stmt"/>
-        <line num="9" count="8" type="cond" truecount="2" falsecount="0"/>
-        <line num="10" count="8" type="cond" truecount="2" falsecount="0"/>
-        <line num="11" count="8" type="cond" truecount="3" falsecount="1"/>
-        <line num="13" count="8" type="cond" truecount="1" falsecount="1"/>
-        <line num="15" count="8" type="stmt"/>
-        <line num="16" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="8" type="cond" truecount="3" falsecount="1"/>
+        <line num="15" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="8" type="stmt"/>
         <line num="18" count="8" type="cond" truecount="2" falsecount="0"/>
-        <line num="19" count="2" type="cond" truecount="3" falsecount="1"/>
-        <line num="20" count="2" type="stmt"/>
+        <line num="20" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="2" type="cond" truecount="3" falsecount="1"/>
         <line num="22" count="2" type="stmt"/>
-        <line num="25" count="6" type="stmt"/>
-        <line num="27" count="6" type="cond" truecount="3" falsecount="1"/>
-        <line num="28" count="6" type="stmt"/>
-        <line num="31" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="34" count="6" type="stmt"/>
-        <line num="37" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="38" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="39" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
+        <line num="29" count="6" type="cond" truecount="3" falsecount="1"/>
+        <line num="30" count="6" type="stmt"/>
+        <line num="33" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="36" count="6" type="stmt"/>
+        <line num="39" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="40" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="6" type="cond" truecount="2" falsecount="0"/>
         <line num="46" count="0" type="stmt"/>
-        <line num="51" count="8" type="stmt"/>
-        <line num="55" count="3" type="cond" truecount="3" falsecount="1"/>
-        <line num="56" count="3" type="stmt"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="60" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="66" count="9" type="stmt"/>
+        <line num="67" count="7" type="stmt"/>
+        <line num="71" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="72" count="3" type="stmt"/>
       </file>
     </package>
   </project>
