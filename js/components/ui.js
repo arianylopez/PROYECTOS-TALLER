@@ -92,17 +92,20 @@ const UI = {
 
     validateManualQuantity() {
         const input = document.getElementById('detail-quantity');
+        const btnMinus = document.getElementById('btn-minus');
+        const btnPlus = document.getElementById('btn-plus');
         let val = parseInt(input.value);
         const maxStock = this.currentDetailProduct.stock;
-
+    
         if (isNaN(val) || val < 1) {
-            input.value = 1;
+            val = 1;
         } else if (val > maxStock) {
-            input.value = maxStock;
+            val = maxStock;
         }
 
-        document.getElementById('btn-minus').disabled = (parseInt(input.value) <= 1);
-        document.getElementById('btn-plus').disabled = (parseInt(input.value) >= maxStock);
+        input.value = val;
+        btnMinus.disabled = (val <= 1);
+        btnPlus.disabled = (val >= maxStock);
     },
 
     showCatalog() {

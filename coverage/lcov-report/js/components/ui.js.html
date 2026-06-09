@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.59% </span>
+                <span class="strong">80.26% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>117/147</span>
+                <span class='fraction'>122/152</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.35% </span>
+                <span class="strong">69.84% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>43/62</span>
+                <span class='fraction'>44/63</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.7% </span>
+                <span class="strong">84.28% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>113/135</span>
+                <span class='fraction'>118/140</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -298,7 +298,13 @@
 <a name='L233'></a><a href='#L233'>233</a>
 <a name='L234'></a><a href='#L234'>234</a>
 <a name='L235'></a><a href='#L235'>235</a>
-<a name='L236'></a><a href='#L236'>236</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L236'></a><a href='#L236'>236</a>
+<a name='L237'></a><a href='#L237'>237</a>
+<a name='L238'></a><a href='#L238'>238</a>
+<a name='L239'></a><a href='#L239'>239</a>
+<a name='L240'></a><a href='#L240'>240</a>
+<a name='L241'></a><a href='#L241'>241</a>
+<a name='L242'></a><a href='#L242'>242</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -384,12 +390,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -400,6 +409,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -473,6 +483,8 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -569,8 +581,8 @@
         }
     },
 &nbsp;
-    showProductDetail(productId) {
-        this.currentDetailProduct = globalProducts.find(p =&gt; p.id === productId);
+    showProductDetail(productId, productsArray = globalProducts) {
+        this.currentDetailProduct = productsArray.find(p =&gt; p.id === productId);
         const p = this.currentDetailProduct;
 &nbsp;
         <span class="missing-if-branch" title="if path not taken" >I</span>if (!p) <span class="cstat-no" title="statement not covered" >return;</span>
@@ -614,29 +626,33 @@
                 btnAdd.disabled = true; 
                 
                 const qty = parseInt(qtyInput.value);
-                CartService.addToCart(p.id, globalProducts, qty);
+                CartService.addToCart(p.id, productsArray, qty);
                 UI.toggleCart(); 
                 
+                const BTN_COOLDOWN_MS = 800; 
                 setTimeout(() =&gt; {
                     btnAdd.disabled = false;
-                }, 800);
+                }, BTN_COOLDOWN_MS);
             };
         }
     },
 &nbsp;
     validateManualQuantity() {
         const input = document.getElementById('detail-quantity');
+        const btnMinus = document.getElementById('btn-minus');
+        const btnPlus = document.getElementById('btn-plus');
         let val = parseInt(input.value);
         const maxStock = this.currentDetailProduct.stock;
-&nbsp;
+    
         if (isNaN(val) || val &lt; 1) {
-            input.value = 1;
+            val = 1;
         } else <span class="missing-if-branch" title="else path not taken" >E</span>if (val &gt; maxStock) {
-            input.value = maxStock;
+            val = maxStock;
         }
 &nbsp;
-        document.getElementById('btn-minus').disabled = (parseInt(input.value) &lt;= 1);
-        document.getElementById('btn-plus').disabled = (parseInt(input.value) &gt;= maxStock);
+        input.value = val;
+        btnMinus.disabled = (val &lt;= 1);
+        btnPlus.disabled = (val &gt;= maxStock);
     },
 &nbsp;
 <span class="fstat-no" title="function not covered" >    sh</span>owCatalog() {
@@ -716,10 +732,12 @@
         
         container.appendChild(toast);
 &nbsp;
+        const TOAST_DURATION_MS = 3500;
+&nbsp;
         setTimeout(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >            toast.classList.add('fade-out');</span>
 <span class="cstat-no" title="statement not covered" >            toast.addEventListener('animationend', <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >toast.remove())</span>;</span>
-        }, 3500);
+        }, TOAST_DURATION_MS);
     },
 &nbsp;
 <span class="fstat-no" title="function not covered" >    ch</span>eckout() {
@@ -775,7 +793,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-09T09:13:42.662Z
+                at 2026-06-09T16:30:53.590Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
