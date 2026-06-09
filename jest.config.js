@@ -5,8 +5,9 @@ module.exports = {
   
   collectCoverage: true,    
   collectCoverageFrom: [
-    'src/**/*.js',          
-    '!src/config/supabase.js' 
+    "services/**/*.js", 
+    "!**/node_modules/**", 
+    "!**/tests/**" 
   ],
   coverageDirectory: 'coverage', 
   coverageReporters: ['text', 'html'],

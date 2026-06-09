@@ -35,3 +35,31 @@ export async function eliminarTurno(id) {
         
     if (error) throw error;
 }
+
+export function obtenerResumenDiario(turnos, fechaBase = new Date()) {
+    const resumen = { programados: 0, completados: 0, cancelados: 0, total: 0 };
+    
+    const inicioHoy = new Date(fechaBase);
+    inicioHoy.setHours(0, 0, 0, 0);
+    
+    const finHoy = new Date(inicioHoy);
+    finHoy.setDate(finHoy.getDate() + 1);
+
+    for (let i = 0; i < turnos.length; i++) {
+        const fechaTurno = new Date(turnos[i].fecha_inicio);
+        
+        if (fechaTurno >= inicioHoy && fechaTurno < finHoy) {
+            resumen.total++;
+            if (turnos[i].estado === 'Programado'){
+                resumen.programados++;
+            }
+            if (turnos[i].estado === 'Completado'){
+                resumen.completados++;
+            }
+            if (turnos[i].estado === 'Cancelado'){
+                resumen.cancelados++;
+            }
+        }
+    }
+    return resumen;
+}
