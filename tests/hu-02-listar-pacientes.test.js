@@ -1,7 +1,7 @@
-import { obtenerPacientes } from '../src/services/pacientesService.js';
-import { supabaseClient } from '../src/config/supabase.js';
+import { obtenerPacientes } from '../services/pacientesService.js';
+import { supabaseClient } from '../config/supabase.js';
 
-jest.mock('../src/config/supabase.js', () => ({
+jest.mock('../config/supabase.js', () => ({
     supabaseClient: {
         from: jest.fn()
     }
