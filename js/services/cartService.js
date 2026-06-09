@@ -77,13 +77,13 @@ const CartService = {
     },
 
     confirmOrder() {
-        let status = '';
-        if (this.paymentMethod === 'efectivo') {
-            status = 'Pendiente de pago';
-        } else {
-            status = 'Pagado';
+        if (this.cart.length === 0) {
+            if (typeof UI !== 'undefined' && UI.showToast) UI.showToast("El carrito esta vacio", "error");
+            return null;
         }
 
+        const finalStatus = this.paymentMethod === 'efectivo' ? 'Pendiente de pago' : 'Pagado';
+        
         this.cart = [];
         
         if (typeof UI !== 'undefined' && UI.renderCart) {
@@ -91,7 +91,8 @@ const CartService = {
         }
 
         return { 
-            status: status, 
+            success: true, 
+            status: finalStatus, 
             method: this.paymentMethod 
         };
     }

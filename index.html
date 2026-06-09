@@ -106,12 +106,26 @@
                 </div>
             </div>
 
+            <div style="margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 1rem;">
+                <h4 style="margin: 0 0 0.5rem 0;">Método de pago:</h4>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="radio" name="payment" value="efectivo" onchange="CartService.setPaymentMethod(this.value)" checked> 
+                        <span>Efectivo (Contra entrega)</span>
+                    </label>
+                    <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="radio" name="payment" value="qr" onchange="CartService.setPaymentMethod(this.value)"> 
+                        <span>Transferencia QR</span>
+                    </label>
+                </div>
+            </div>
+
             <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: #6b7280;">
                 <span>Subtotal:</span>
                 <span>Bs. <span id="cart-subtotal">0.00</span></span>
             </div>
             <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: #6b7280;">
-                <span>Costo de envío:</span>
+                <span>Envío:</span>
                 <span>Bs. <span id="cart-shipping">0.00</span></span>
             </div>
             <h3 style="display: flex; justify-content: space-between; margin-top: 0;">
@@ -119,7 +133,7 @@
                 <span>Bs. <span id="cart-total">0.00</span></span>
             </h3>
             
-            <button id="btn-checkout" class="btn-primary">Confirmar Reserva</button>
+            <button id="btn-checkout" class="btn-primary" onclick="UI.checkout()">Confirmar Reserva</button>
         </div>
     </aside>
 

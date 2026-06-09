@@ -187,6 +187,16 @@ const UI = {
         }, 3500);
     },
 
+    checkout() {
+        const orderResult = CartService.confirmOrder();
+        
+        if (orderResult) {
+            this.toggleCart(); 
+            
+            this.showToast(`Pedido confirmado! Estado: ${orderResult.status}`, "success");
+        }
+    },
+
     refreshStockDisplays(product) {
         if (typeof globalProducts !== 'undefined' && document.getElementById('catalog-container')) {
             this.renderProducts(globalProducts);
