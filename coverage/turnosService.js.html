@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.83% </span>
+                <span class="strong">41.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/31</span>
+                <span class='fraction'>10/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">27.77% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/22</span>
+                <span class='fraction'>5/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/4</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.53% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/26</span>
+                <span class='fraction'>10/20</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -117,17 +117,7 @@
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -165,11 +155,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -180,17 +165,12 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { supabaseClient } from '../config/supabase.js';
 &nbsp;
 export async function <span class="fstat-no" title="function not covered" >obtenerTurnos(</span>) {
@@ -230,31 +210,21 @@ export async function <span class="fstat-no" title="function not covered" >elimi
 }
 &nbsp;
 export function obtenerResumenDiario(turnos, fechaBase = <span class="branch-0 cbranch-no" title="branch not covered" >new Date())</span> {
-    const resumen = { programados: 0, completados: 0, cancelados: 0, total: 0 };
-    
-    const inicioHoy = new Date(fechaBase);
-    inicioHoy.setHours(0, 0, 0, 0);
-    
-    const finHoy = new Date(inicioHoy);
-    finHoy.setDate(finHoy.getDate() + 1);
+    const inicioHoy = new Date(fechaBase).setHours(0, 0, 0, 0);
+    const limiteManana = new Date(inicioHoy).setDate(new Date(inicioHoy).getDate() + 1);
 &nbsp;
-    for (let i = 0; i &lt; turnos.length; i++) {
-        const fechaTurno = new Date(turnos[i].fecha_inicio);
+    return turnos.reduce((acc, turno) =&gt; {
+        const tiempoTurno = new Date(turno.fecha_inicio).getTime();
         
-        if (fechaTurno &gt;= inicioHoy &amp;&amp; fechaTurno &lt; finHoy) {
-            resumen.total++;
-            if (turnos[i].estado === 'Programado'){
-                resumen.programados++;
-            }
-            if (turnos[i].estado === 'Completado'){
-                resumen.completados++;
-            }
-            if (turnos[i].estado === 'Cancelado'){
-                resumen.cancelados++;
+        if (tiempoTurno &gt;= inicioHoy &amp;&amp; tiempoTurno &lt; limiteManana) {
+            acc.total++;
+            const estadoKey = turno.estado.toLowerCase() + 's'; 
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (acc[estadoKey] !== undefined) {
+                acc[estadoKey]++;
             }
         }
-    }
-    return resumen;
+        return acc;
+    }, { programados: 0, completados: 0, cancelados: 0, total: 0 });
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -262,7 +232,7 @@ export function obtenerResumenDiario(turnos, fechaBase = <span class="branch-0 c
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-09T17:52:50.174Z
+                at 2026-06-09T19:56:54.024Z
             </div>
         <script src="prettify.js"></script>
         <script>

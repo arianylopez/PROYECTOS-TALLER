@@ -33,6 +33,26 @@
                 </a>
             </nav>
 
+            <div class="sidebar__widget" style="margin: 1.5rem 1rem 0 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <h3 style="margin-top: 0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="trending-up" style="width: 16px; height: 16px; color: #a78bfa;"></i> Rendimiento de Hoy
+                </h3>
+                <div style="display: flex; justify-content: space-between; text-align: center; gap: 0.5rem;">
+                    <div style="flex: 1;">
+                        <div id="res-prog" style="font-size: 1.4rem; font-weight: bold; color: #a78bfa;">0</div>
+                        <div style="font-size: 0.65rem; color: #9ca3af; text-transform: uppercase;">Por atender</div>
+                    </div>
+                    <div style="flex: 1; border-left: 1px solid rgba(255, 255, 255, 0.1); border-right: 1px solid rgba(255, 255, 255, 0.1);">
+                        <div id="res-comp" style="font-size: 1.4rem; font-weight: bold; color: #34d399;">0</div>
+                        <div style="font-size: 0.65rem; color: #9ca3af; text-transform: uppercase;">Completados</div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div id="res-canc" style="font-size: 1.4rem; font-weight: bold; color: #f87171;">0</div>
+                        <div style="font-size: 0.65rem; color: #9ca3af; text-transform: uppercase;">Cancelados</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="sidebar__widget">
                 <h3 class="sidebar__widget-title">
                     <i data-lucide="clock"></i> Próximos Turnos
