@@ -134,6 +134,10 @@ const UI = {
         const container = document.getElementById('cart-items-container');
         const countSpan = document.getElementById('cart-count');
         const totalSpan = document.getElementById('cart-total');
+        const subtotalSpan = document.getElementById('cart-subtotal');
+        const shippingSpan = document.getElementById('cart-shipping');
+        
+        if (!container) return; 
         
         container.innerHTML = '';
         let totalItems = 0;
@@ -158,8 +162,10 @@ const UI = {
             container.appendChild(div);
         });
 
-        countSpan.textContent = totalItems;
-        totalSpan.textContent = CartService.getTotal().toFixed(2);
+        if (countSpan) countSpan.textContent = totalItems;
+        if (subtotalSpan) subtotalSpan.textContent = CartService.getSubtotal().toFixed(2);
+        if (shippingSpan) shippingSpan.textContent = CartService.shippingCost.toFixed(2);
+        if (totalSpan) totalSpan.textContent = CartService.getTotal().toFixed(2);
     },
 
     showToast(message, type = 'error') {
