@@ -34,8 +34,8 @@ const UI = {
         }
     },
 
-    showProductDetail(productId) {
-        this.currentDetailProduct = globalProducts.find(p => p.id === productId);
+    showProductDetail(productId, productsArray = globalProducts) {
+        this.currentDetailProduct = productsArray.find(p => p.id === productId);
         const p = this.currentDetailProduct;
 
         if (!p) return;
@@ -79,12 +79,13 @@ const UI = {
                 btnAdd.disabled = true; 
                 
                 const qty = parseInt(qtyInput.value);
-                CartService.addToCart(p.id, globalProducts, qty);
+                CartService.addToCart(p.id, productsArray, qty);
                 UI.toggleCart(); 
                 
+                const BTN_COOLDOWN_MS = 800; 
                 setTimeout(() => {
                     btnAdd.disabled = false;
-                }, 800);
+                }, BTN_COOLDOWN_MS);
             };
         }
     },
