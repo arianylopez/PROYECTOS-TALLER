@@ -181,10 +181,12 @@ const UI = {
         
         container.appendChild(toast);
 
+        const TOAST_DURATION_MS = 3500;
+
         setTimeout(() => {
             toast.classList.add('fade-out');
             toast.addEventListener('animationend', () => toast.remove());
-        }, 3500);
+        }, TOAST_DURATION_MS);
     },
 
     checkout() {
