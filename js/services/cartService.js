@@ -11,6 +11,7 @@ const CartService = {
     },
     deliveryMethod: 'recojo_tienda',
     shippingCost: 0,
+    paymentMethod: 'efectivo',
 
     setDeliveryMethod(method) {
         this.deliveryMethod = method;
@@ -69,6 +70,30 @@ const CartService = {
 
     getTotal() {
         return this.getSubtotal() + this.shippingCost;
+    },
+
+    setPaymentMethod(method) {
+        this.paymentMethod = method;
+    },
+
+    confirmOrder() {
+        let status = '';
+        if (this.paymentMethod === 'efectivo') {
+            status = 'Pendiente de pago';
+        } else {
+            status = 'Pagado';
+        }
+
+        this.cart = [];
+        
+        if (typeof UI !== 'undefined' && UI.renderCart) {
+            UI.renderCart(this.cart);
+        }
+
+        return { 
+            status: status, 
+            method: this.paymentMethod 
+        };
     }
 };
 
