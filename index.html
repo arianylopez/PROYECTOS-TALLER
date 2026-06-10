@@ -245,6 +245,13 @@
                     <textarea class="form__input form__textarea" id="notasPaciente" name="notasPaciente"></textarea>
                 </div>
 
+                <div id="contenedor-estadistica-paciente" style="margin-top: 1rem; padding: 0.75rem; background: #f3f4f6; border-radius: 6px; display: none;">
+                    <p style="margin: 0; font-size: 0.9rem; color: #4b5563; display: flex; align-items: center; justify-content: space-between;">
+                        <strong><i data-lucide="pie-chart" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> Tasa de asistencia:</strong> 
+                        <span id="paciente-tasa-valor" style="font-size: 1.1rem; font-weight: bold; color: #6d28d9;">N/A</span>
+                    </p>
+                </div>
+
                 <div class="modal__actions">
                     <button type="button" id="btnCancelarPaciente" class="btn btn--secondary">Cancelar</button>
                     <button type="submit" class="btn btn--primary">Guardar</button>

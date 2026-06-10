@@ -1,6 +1,6 @@
 import { obtenerPacientes, guardarPaciente, eliminarPaciente, marcarPacientesInconsistentes } from '../services/pacientesService.js';
 import { recargarTurnosVisuales } from './calendario.js';
-import { obtenerTurnos } from '../services/turnosService.js'; 
+import { obtenerTurnos, calcularTasaAsistencia } from '../services/turnosService.js'; 
 
 const tablaPacientesBody = document.getElementById('tablaPacientesBody');
 const inputBusquedaTabla = document.getElementById('busquedaTablaPacientes');
@@ -16,9 +16,9 @@ export async function cargarYRenderizarPacientes() {
         const pacientesData = await obtenerPacientes();
         const turnosData = await obtenerTurnos(); 
         
-        const pacientesProcesados = marcarPacientesInconsistentes(pacientesData, turnosData);
+        pacientesGlobal = marcarPacientesInconsistentes(pacientesData, turnosData);
 
-        renderizarTablaPacientes(pacientesProcesados);
+        renderizarTablaPacientes(pacientesGlobal);
     } catch (error) {
         console.error('Error al cargar la vista de pacientes:', error);
     }
@@ -54,7 +54,7 @@ function renderizarTablaPacientes(datos) {
     }
 }
 
-window.editarPaciente = function(id) {
+window.editarPaciente = async function(id) {
     const paciente = pacientesGlobal.find(p => p.id === id);
     if (!paciente) return;
 
@@ -64,6 +64,27 @@ window.editarPaciente = function(id) {
     document.getElementById('emailPaciente').value = paciente.email || '';
     document.getElementById('telefonoPaciente').value = paciente.telefono || '';
     document.getElementById('notasPaciente').value = paciente.notas || '';
+
+    const contenedorEstadistica = document.getElementById('contenedor-estadistica-paciente');
+    const valorTasa = document.getElementById('paciente-tasa-valor');
+    
+    if (contenedorEstadistica && valorTasa) {
+        contenedorEstadistica.style.display = 'block';
+        valorTasa.textContent = "Calculando...";
+        
+        try {
+            const todosLosTurnos = await obtenerTurnos();
+            const turnosDelPaciente = todosLosTurnos.filter(t => t.paciente_id === paciente.id);
+            
+            const tasa = calcularTasaAsistencia(turnosDelPaciente);
+            valorTasa.textContent = tasa;
+            
+            if (window.lucide) window.lucide.createIcons();
+        } catch (error) {
+            console.error("Error al calcular tasa:", error);
+            valorTasa.textContent = "Error";
+        }
+    }
 
     modalPaciente.showModal();
 };
@@ -95,6 +116,10 @@ export function inicializarPacientesUI() {
         document.getElementById('modalPacienteTitulo').textContent = 'Nuevo Paciente';
         document.getElementById('pacienteId').value = ''; 
         formNuevoPaciente.reset(); 
+
+        const contenedorEstadistica = document.getElementById('contenedor-estadistica-paciente');
+        if (contenedorEstadistica) contenedorEstadistica.style.display = 'none';
+
         modalPaciente.showModal();
     });
     

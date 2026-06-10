@@ -55,17 +55,10 @@ export function obtenerResumenDiario(turnos, fechaBase = new Date()) {
 }
 
 export function calcularTasaAsistencia(turnos) {
-    if (turnos.length === 0) {
-        return "N/A";
-    }
+    if (!turnos || turnos.length === 0) return "N/A";
     
-    let completados = 0;
-    for (let i = 0; i < turnos.length; i++) {
-        if (turnos[i].estado === 'Completado') {
-            completados++;
-        }
-    }
+    const completados = turnos.filter(t => t.estado === 'Completado').length;
+    const porcentaje = Math.round((completados / turnos.length) * 100);
     
-    let porcentaje = (completados / turnos.length) * 100;
-    return Math.round(porcentaje) + "%";
+    return `${porcentaje}%`;
 }
