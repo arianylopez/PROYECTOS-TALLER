@@ -13,18 +13,13 @@ export async function obtenerTurnos() {
 }
 
 export async function guardarTurno(turnoData, id = null) {
-    if (id) {
-        const { error } = await supabaseClient
-            .from('turnos')
-            .update(turnoData)
-            .eq('id', id);
-        if (error) throw error;
-    } else {
-        const { error } = await supabaseClient
-            .from('turnos')
-            .insert([turnoData]);
-        if (error) throw error;
-    }
+    const query = id 
+        ? supabaseClient.from('turnos').update(turnoData).eq('id', id)
+        : supabaseClient.from('turnos').insert([turnoData]);
+
+    const { error } = await query;
+    
+    if (error) throw error;
 }
 
 export async function eliminarTurno(id) {
