@@ -13,11 +13,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     inicializarPacientesUI();
     
     try {
-        await cargarYRenderizarHorarios();
-        
-        await inicializarCalendario();
-        
-        await cargarYRenderizarPacientes();
+        await Promise.all([
+            cargarYRenderizarHorarios(),
+            inicializarCalendario(),
+            cargarYRenderizarPacientes()
+        ]);
 
         const turnos = await obtenerTurnos();
         const resumen = obtenerResumenDiario(turnos, new Date());
