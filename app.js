@@ -22,13 +22,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         const turnos = await obtenerTurnos();
         const resumen = obtenerResumenDiario(turnos, new Date());
         
-        const progEl = document.getElementById('res-prog');
-        const compEl = document.getElementById('res-comp');
-        const cancEl = document.getElementById('res-canc');
+        const mapeoDashboard = [
+            { id: 'res-prog', valor: resumen.programados },
+            { id: 'res-comp', valor: resumen.completados },
+            { id: 'res-canc', valor: resumen.cancelados }
+        ];
 
-        if (progEl) progEl.textContent = resumen.programados;
-        if (compEl) compEl.textContent = resumen.completados;
-        if (cancEl) cancEl.textContent = resumen.cancelados;
+        mapeoDashboard.forEach(item => {
+            const elementoDOM = document.getElementById(item.id);
+            if (elementoDOM) elementoDOM.textContent = item.valor;
+        });
         
         if (window.lucide) {
             window.lucide.createIcons();
