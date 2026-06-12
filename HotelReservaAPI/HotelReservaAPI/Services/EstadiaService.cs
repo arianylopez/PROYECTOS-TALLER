@@ -12,17 +12,20 @@ namespace HotelReservaAPI.Services
         private readonly IEstadiaRepository _estadiaRepository;
         private readonly IHabitacionRepository _habitacionRepository;
         private readonly IPoliticaCancelacionRepository _politicaRepository;
+        private readonly IHuespedRepository _huespedRepository;
         private readonly Client _supabase;
 
         public EstadiaService(
             IEstadiaRepository estadiaRepository,
             IHabitacionRepository habitacionRepository,
             IPoliticaCancelacionRepository politicaRepository,
+            IHuespedRepository huespedRepository,
             Client supabase)
         {
             _estadiaRepository = estadiaRepository;
             _habitacionRepository = habitacionRepository;
             _politicaRepository = politicaRepository;
+            _huespedRepository = huespedRepository;
             _supabase = supabase;
         }
 
@@ -148,6 +151,11 @@ namespace HotelReservaAPI.Services
 
             reserva.Estado = "Cancelada";
             return _estadiaRepository.Actualizar(reserva);
+        }
+
+        public List<Estadia> BuscarReservasPorHuesped(string terminoBusqueda)
+        {
+            throw new NotImplementedException("Preparando funcion para prueba");
         }
     }
 }

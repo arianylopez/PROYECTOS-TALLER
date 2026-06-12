@@ -11,5 +11,6 @@ namespace HotelReservaAPI.Services
         Estadia RegistrarCheckIn(string estadiaId, List<string> acompanantesIds);
         Estadia RegistrarCheckOut(string estadiaId, DateTime? fechaSalidaReal = null);
         Estadia CancelarReserva(string estadiaId);
+        List<Estadia> BuscarReservasPorHuesped(string terminoBusqueda);
     }
 }
