@@ -56,17 +56,16 @@ namespace HotelReservaAPI
             });
 
             var app = builder.Build();
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseCors("AllowAll");
             app.UseAuthorization();
             app.MapControllers();
+
+            var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+            app.Urls.Add($"http://0.0.0.0:{port}");
             app.Run();
         }
     }
