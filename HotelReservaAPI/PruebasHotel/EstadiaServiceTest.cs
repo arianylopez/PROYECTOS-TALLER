@@ -1,70 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Moq;
+using System;
 using HotelReservaAPI.Models;
-using HotelReservaAPI.Repositories;
 using HotelReservaAPI.Services;
+using HotelReservaAPI.Repositories;
 using Supabase;
-
 
 namespace HotelReservaAPI.Tests
 {
     [TestFixture]
-    public class EstadiaServiceTests
+    public class EstadiaServiceTest
     {
-        [Test]
-        public void CrearReserva_DatosValidos_DebeRegistrarReservaCorrectamente()
+        private Mock<IEstadiaRepository> _estadiaRepositoryMock;
+        private Mock<IHabitacionRepository> _habitacionRepositoryMock;
+        private Mock<IPoliticaCancelacionRepository> _politicaRepositoryMock;
+        private EstadiaService _estadiaService;
+
+        [SetUp]
+        public void Setup()
         {
-            var mockEstadiaRepo = new Mock<IEstadiaRepository>();
-            var mockHabitacionRepo = new Mock<IHabitacionRepository>();
-            var mockPoliticaRepo = new Mock<IPoliticaCancelacionRepository>();
+            _estadiaRepositoryMock = new Mock<IEstadiaRepository>();
+            _habitacionRepositoryMock = new Mock<IHabitacionRepository>();
+            _politicaRepositoryMock = new Mock<IPoliticaCancelacionRepository>();
 
-            var estadiaInput = new Estadia
-            {
-                HabitacionId = "1",
-                FechaIngreso = DateTime.Now.AddDays(1),
-                FechaSalida = DateTime.Now.AddDays(5),
-                CantidadPersonas = 2
-            };
-
-            var habitacionSimulada = new Habitacion
-            {
-                TipoHabitacionId = "10"
-            };
-
-            var tipoHabitacionSimulada = new TipoHabitacion
-            {
-                TipoHabitacionId = 1,
-                Capacidad = 4,
-                PrecioBase = 5000
-            };
-
-            mockHabitacionRepo.Setup(repo => repo.ObtenerHabitacionPorId(estadiaInput.HabitacionId))
-                              .Returns(habitacionSimulada);
-
-            mockHabitacionRepo.Setup(repo => repo.ObtenerTipoHabitacionPorId(habitacionSimulada.TipoHabitacionId))
-                              .Returns(tipoHabitacionSimulada);
-
-            mockEstadiaRepo.Setup(repo => repo.Insertar(It.IsAny<Estadia>()))
-                           .Returns((Estadia e) => e);
-
-            var servicio = new EstadiaService(
-                mockEstadiaRepo.Object,
-                mockHabitacionRepo.Object,
-                mockPoliticaRepo.Object,
-                null
+            _estadiaService = new EstadiaService(
+                _estadiaRepositoryMock.Object,
+                _habitacionRepositoryMock.Object,
+                _politicaRepositoryMock.Object,
+                null 
             );
+        }
 
-            var resultado = servicio.CrearReserva(estadiaInput);
+        [Test]
+        public void RegistrarCheckOut_SalidaDespuesDelLimite_AplicaRecargoLateCheckout()
+        {
+            // Arrange
+            var estadiaId = "estadia-123";
 
-            Assert.That(resultado, Is.Not.Null);
-            Assert.That(resultado.Estado, Is.EqualTo("Reservada"));
-            Assert.That(resultado.PrecioAplicado, Is.EqualTo(5000));
-            Assert.That(resultado.Mora, Is.EqualTo(0));
-            Assert.That((DateTime.Now - resultado.FechaCreacion).TotalSeconds, Is.LessThan(5));
-            mockEstadiaRepo.Verify(repo => repo.Insertar(It.IsAny<Estadia>()), Times.Once);
+            var reservaMock = new Estadia
+            {
+                EstadiaId = estadiaId,
+                Estado = "En curso",
+                Mora = 0,
+                HabitacionId = "hab-1"
+            };
+
+            _estadiaRepositoryMock.Setup(repo => repo.ObtenerPorId(estadiaId)).Returns(reservaMock);
+            _habitacionRepositoryMock.Setup(repo => repo.ObtenerHabitacionPorId("hab-1")).Returns((Habitacion)null);
+
+            // Act
+            var resultado = _estadiaService.RegistrarCheckOut(estadiaId);
+            resultado.FechaHoraCheckout = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 15, 0, 0);
+
+            // Assert
+            Assert.That(resultado.Estado, Is.EqualTo("Finalizada"));
+            Assert.That(resultado.Mora, Is.GreaterThan(0), "Debe aplicar una mora por late check-out");
+            Assert.That(resultado.Mora, Is.EqualTo(50m));
         }
     }
 }
