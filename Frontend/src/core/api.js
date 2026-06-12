@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://localhost:7236/api';
+const API_BASE_URL = 'https://proyectos-taller.onrender.com/api';
 
 export const api = {
     get: async (endpoint) => {
