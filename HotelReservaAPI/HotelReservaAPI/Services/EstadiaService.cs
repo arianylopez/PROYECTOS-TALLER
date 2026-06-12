@@ -155,24 +155,22 @@ namespace HotelReservaAPI.Services
 
         public List<Estadia> BuscarReservasPorHuesped(string terminoBusqueda)
         {
-            var todasLasReservas = _estadiaRepository.ObtenerTodas().ToList();
-            var resultados = new List<Estadia>();
+            if (string.IsNullOrWhiteSpace(terminoBusqueda))
+                return new List<Estadia>();
 
-            foreach (var reserva in todasLasReservas)
-            {
-                var huesped = _huespedRepository.ObtenerPorId(reserva.HuespedTitularId);
-                if (huesped != null)
+            var terminoLower = terminoBusqueda.ToLower();
+
+            return _estadiaRepository.ObtenerTodas()
+                .ToList()
+                .Where(reserva =>
                 {
-                    var nombreLower = (huesped.Nombre ?? "").ToLower();
-                    var terminoLower = terminoBusqueda.ToLower();
+                    var huesped = _huespedRepository.ObtenerPorId(reserva.HuespedTitularId);
+                    if (huesped == null) return false;
 
-                    if (nombreLower.Contains(terminoLower))
-                    {
-                        resultados.Add(reserva);
-                    }
-                }
-            }
-            return resultados;
+                    return (huesped.Nombre ?? "").ToLower().Contains(terminoLower) ||
+                           (huesped.DocumentoIdentidad ?? "").ToLower().Contains(terminoLower);
+                })
+                .ToList();
         }
     }
 }

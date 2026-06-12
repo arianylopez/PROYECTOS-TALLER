@@ -290,7 +290,7 @@ var assemblies = [
   {
     "name": "HotelReservaAPI",
     "classes": [
-      { "name": "HotelReservaAPI.Services.EstadiaService", "rp": "HotelReservaAPI_EstadiaService.html", "cl": 24, "ucl": 87, "cal": 111, "tl": 150, "cb": 5, "tb": 64, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Services.EstadiaService", "rp": "HotelReservaAPI_EstadiaService.html", "cl": 49, "ucl": 101, "cal": 150, "tl": 176, "cb": 13, "tb": 116, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "HotelReservaAPI.Services.HabitacionService", "rp": "HotelReservaAPI_HabitacionService.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 26, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "HotelReservaAPI.Services.HuespedService", "rp": "HotelReservaAPI_HuespedService.html", "cl": 20, "ucl": 26, "cal": 46, "tl": 77, "cb": 8, "tb": 14, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "HotelReservaAPI.Services.ServicioService", "rp": "HotelReservaAPI_ServicioService.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -320,6 +320,18 @@ var riskHotspots = [
       { "value": 16, "exceeded": true },
     ]},
   {
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "CrearReserva(HotelReservaAPI.Models.Estadia)", "methodShortName": "CrearReserva(...)", "fileIndex": 0, "line": 33,
+    "metrics": [
+      { "value": 272, "exceeded": true },
+      { "value": 16, "exceeded": true },
+    ]},
+  {
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "RegistrarCheckIn(System.String,System.Collections.Generic.List\u00601\u003CSystem.String\u003E)", "methodShortName": "RegistrarCheckIn(...)", "fileIndex": 0, "line": 76,
+    "metrics": [
+      { "value": 272, "exceeded": true },
+      { "value": 16, "exceeded": true },
+    ]},
+  {
     "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "CancelarReserva(System.String)", "methodShortName": "CancelarReserva(...)", "fileIndex": 0, "line": 129,
     "metrics": [
       { "value": 110, "exceeded": true },
@@ -327,6 +339,12 @@ var riskHotspots = [
     ]},
   {
     "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "CancelarReserva(System.String)", "methodShortName": "CancelarReserva(...)", "fileIndex": 0, "line": 131,
+    "metrics": [
+      { "value": 110, "exceeded": true },
+      { "value": 10, "exceeded": false },
+    ]},
+  {
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "CancelarReserva(System.String)", "methodShortName": "CancelarReserva(...)", "fileIndex": 0, "line": 135,
     "metrics": [
       { "value": 110, "exceeded": true },
       { "value": 10, "exceeded": false },
