@@ -73,5 +73,10 @@ namespace HotelReservaAPI.Services
                 throw new Exception("Nombre, Apellido y Documento son obligatorios.");
             }
         }
+
+        public Huesped ObtenerInformacionHuesped(string id)
+        {
+            throw new NotImplementedException("Preparando funcion para prueba");
+        }
     }
 }

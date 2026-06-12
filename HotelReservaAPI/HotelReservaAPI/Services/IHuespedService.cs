@@ -7,6 +7,7 @@ namespace HotelReservaAPI.Services
     {
         List<Huesped> ObtenerTodos();
         Huesped RegistrarHuesped(Huesped huesped);
-        Huesped ActualizarHuesped(string id, Huesped huespedActualizado); 
+        Huesped ActualizarHuesped(string id, Huesped huespedActualizado);
+        Huesped ObtenerInformacionHuesped(string id);
     }
 }

@@ -89,5 +89,32 @@ namespace HotelReservaAPI.Tests
             Assert.AreEqual("Ya existe un huésped registrado con este documento.", excepcion.Message);
             _huespedRepoMock.Verify(repo => repo.Insertar(It.IsAny<Huesped>()), Times.Never);
         }
+
+        [Test]
+        public void ObtenerInformacionHuesped_HuespedExistente_RetornaInformacionCorrecta()
+        {
+            // Arrange
+            var huespedId = "h-123";
+            var huespedMock = new Huesped
+            {
+                HuespedId = huespedId,
+                Nombre = "Ariany Lopez",
+                DocumentoIdentidad = "13174150",
+                Telefono = "77205461",
+                Correo = "arianylopez@gmail.com"
+            };
+
+            _huespedRepoMock.Setup(repo => repo.ObtenerPorId(huespedId)).Returns(huespedMock);
+
+            // Act
+            var resultado = _huespedService.ObtenerInformacionHuesped(huespedId);
+
+            // Assert
+            Assert.That(resultado, Is.Not.Null, "El huesped no debe ser nulo");
+            Assert.That(resultado.Nombre, Is.EqualTo("Ariany Lopez"));
+            Assert.That(resultado.DocumentoIdentidad, Is.EqualTo("13174150"));
+            Assert.That(resultado.Telefono, Is.EqualTo("77205461"));
+            Assert.That(resultado.Correo, Is.EqualTo("arianylopez@gmail.com"));
+        }
     }
 }
