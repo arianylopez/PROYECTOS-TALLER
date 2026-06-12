@@ -116,9 +116,12 @@ namespace HotelReservaAPI.Services
             reserva.Estado = "Finalizada";
             reserva.FechaHoraCheckout = fechaSalidaReal ?? DateTime.Now;
 
-            if (reserva.FechaHoraCheckout.Value.Hour >= 13)
+            const int HORA_LIMITE_CHECKOUT = 12;
+            const decimal PENALIDAD_LATE_CHECKOUT = 50m;
+
+            if (reserva.FechaHoraCheckout.Value.Hour > HORA_LIMITE_CHECKOUT)
             {
-                reserva.Mora += 50m;
+                reserva.Mora += PENALIDAD_LATE_CHECKOUT;
             }
 
             _estadiaRepository.Actualizar(reserva);
