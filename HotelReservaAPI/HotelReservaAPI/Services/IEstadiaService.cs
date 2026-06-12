@@ -9,7 +9,7 @@ namespace HotelReservaAPI.Services
         List<Estadia> ObtenerReservasActivasYFuturas();
         List<Estadia> ObtenerTodas();
         Estadia RegistrarCheckIn(string estadiaId, List<string> acompanantesIds);
-        Estadia RegistrarCheckOut(string estadiaId);
+        Estadia RegistrarCheckOut(string estadiaId, DateTime? fechaSalidaReal = null);
         Estadia CancelarReserva(string estadiaId);
     }
 }

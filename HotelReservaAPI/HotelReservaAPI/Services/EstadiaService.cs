@@ -106,7 +106,7 @@ namespace HotelReservaAPI.Services
             return reserva;
         }
 
-        public Estadia RegistrarCheckOut(string estadiaId)
+        public Estadia RegistrarCheckOut(string estadiaId, DateTime? fechaSalidaReal = null)
         {
             var reserva = _estadiaRepository.ObtenerPorId(estadiaId);
             if (reserva == null) throw new Exception("La reserva no existe.");
@@ -114,16 +114,14 @@ namespace HotelReservaAPI.Services
             if (reserva.Estado != "En curso") throw new Exception("Solo se puede hacer check-out de una reserva 'En curso'.");
 
             reserva.Estado = "Finalizada";
-            reserva.FechaHoraCheckout = DateTime.Now;
-            _estadiaRepository.Actualizar(reserva);
+            reserva.FechaHoraCheckout = fechaSalidaReal ?? DateTime.Now;
 
-            var habitacion = _habitacionRepository.ObtenerHabitacionPorId(reserva.HabitacionId);
-            if (habitacion != null)
+            if (reserva.FechaHoraCheckout.Value.Hour >= 13)
             {
-                habitacion.Estado = "Disponible";
-                _supabase.From<Habitacion>().Update(habitacion).Wait();
+                reserva.Mora += 50m;
             }
 
+            _estadiaRepository.Actualizar(reserva);
             return reserva;
         }
 

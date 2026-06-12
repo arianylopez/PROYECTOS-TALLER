@@ -46,13 +46,13 @@ namespace HotelReservaAPI.Tests
             };
 
             _estadiaRepositoryMock.Setup(repo => repo.ObtenerPorId(estadiaId)).Returns(reservaMock);
-            _habitacionRepositoryMock.Setup(repo => repo.ObtenerHabitacionPorId("hab-1")).Returns((Habitacion)null);
 
-            // Act
-            var resultado = _estadiaService.RegistrarCheckOut(estadiaId);
-            resultado.FechaHoraCheckout = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 15, 0, 0);
+            var fechaSalidaTardia = new DateTime(2026, 6, 15, 15, 0, 0);
 
-            // Assert
+            // Act 
+            var resultado = _estadiaService.RegistrarCheckOut(estadiaId, fechaSalidaTardia);
+
+            // Assert 
             Assert.That(resultado.Estado, Is.EqualTo("Finalizada"));
             Assert.That(resultado.Mora, Is.GreaterThan(0), "Debe aplicar una mora por late check-out");
             Assert.That(resultado.Mora, Is.EqualTo(50m));

@@ -290,7 +290,7 @@ var assemblies = [
   {
     "name": "HotelReservaAPI",
     "classes": [
-      { "name": "HotelReservaAPI.Services.EstadiaService", "rp": "HotelReservaAPI_EstadiaService.html", "cl": 0, "ucl": 103, "cal": 103, "tl": 152, "cb": 0, "tb": 50, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Services.EstadiaService", "rp": "HotelReservaAPI_EstadiaService.html", "cl": 24, "ucl": 87, "cal": 111, "tl": 150, "cb": 5, "tb": 64, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "HotelReservaAPI.Services.HabitacionService", "rp": "HotelReservaAPI_HabitacionService.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 26, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "HotelReservaAPI.Services.HuespedService", "rp": "HotelReservaAPI_HuespedService.html", "cl": 20, "ucl": 26, "cal": 46, "tl": 77, "cb": 8, "tb": 14, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "HotelReservaAPI.Services.ServicioService", "rp": "HotelReservaAPI_ServicioService.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -318,6 +318,12 @@ var riskHotspots = [
     "metrics": [
       { "value": 272, "exceeded": true },
       { "value": 16, "exceeded": true },
+    ]},
+  {
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "CancelarReserva(System.String)", "methodShortName": "CancelarReserva(...)", "fileIndex": 0, "line": 129,
+    "metrics": [
+      { "value": 110, "exceeded": true },
+      { "value": 10, "exceeded": false },
     ]},
   {
     "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "CancelarReserva(System.String)", "methodShortName": "CancelarReserva(...)", "fileIndex": 0, "line": 131,
