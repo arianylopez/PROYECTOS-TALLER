@@ -76,7 +76,7 @@ namespace HotelReservaAPI.Services
 
         public Huesped ObtenerInformacionHuesped(string id)
         {
-            throw new NotImplementedException("Preparando funcion para prueba");
+            return _huespedRepository.ObtenerPorId(id);
         }
     }
 }
