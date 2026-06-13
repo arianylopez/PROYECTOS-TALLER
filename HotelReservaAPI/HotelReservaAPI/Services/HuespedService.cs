@@ -76,7 +76,17 @@ namespace HotelReservaAPI.Services
 
         public Huesped ObtenerInformacionHuesped(string id)
         {
-            return _huespedRepository.ObtenerPorId(id);
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentException("Se debe ingresar ID para la busqueda");
+            }
+
+            var huesped = _huespedRepository.ObtenerPorId(id);
+
+            if (huesped == null)
+                throw new Exception("El huesped no se encuentra registrado en el sistema");
+
+            return huesped;
         }
     }
 }
