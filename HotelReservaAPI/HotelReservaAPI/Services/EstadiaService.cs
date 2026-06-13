@@ -48,22 +48,28 @@ namespace HotelReservaAPI.Services
             if (estadia.CantidadPersonas > tipoHabitacion.Capacidad)
                 throw new Exception("La cantidad de personas supera la capacidad de la habitación.");
 
-            var reservasExistentes = _estadiaRepository.ObtenerTodas()
-                .Where(r => r.HabitacionId == estadia.HabitacionId && r.Estado != "Cancelada" && r.Estado != "Finalizada")
-                .ToList();
+            ValidarDisponibilidadFechas(estadia);
 
-            foreach (var reserva in reservasExistentes)
-            {
-                if (estadia.FechaIngreso < reserva.FechaSalida && estadia.FechaSalida > reserva.FechaIngreso)
-                    throw new Exception("La habitación ya está reservada en ese rango de fechas.");
-            }
-
-            estadia.Estado = "Reservada";
+            estadia.Estado = EstadosReserva.Reservada;
             estadia.PrecioAplicado = tipoHabitacion.PrecioBase;
             estadia.FechaCreacion = DateTime.Now;
             estadia.Mora = 0;
 
             return _estadiaRepository.Insertar(estadia);
+        }
+
+        private void ValidarDisponibilidadFechas(Estadia nuevaEstadia)
+        {
+            var reservasExistentes = _estadiaRepository.ObtenerTodas()
+                .Where(r => r.HabitacionId == nuevaEstadia.HabitacionId &&
+                            r.Estado != EstadosReserva.Cancelada && r.Estado != EstadosReserva.Finalizada);
+
+            bool hayConflicto = reservasExistentes.Any(reserva =>
+                nuevaEstadia.FechaIngreso < reserva.FechaSalida &&
+                nuevaEstadia.FechaSalida > reserva.FechaIngreso);
+
+            if (hayConflicto)
+                throw new Exception("Habitación ya reservada en ese rango de fechas");
         }
 
         public List<Estadia> ObtenerReservasActivasYFuturas()
