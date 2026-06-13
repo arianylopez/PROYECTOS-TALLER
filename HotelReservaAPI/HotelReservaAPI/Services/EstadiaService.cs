@@ -148,22 +148,28 @@ namespace HotelReservaAPI.Services
         {
             var reserva = _estadiaRepository.ObtenerPorId(estadiaId);
             if (reserva == null) throw new Exception("La reserva no existe.");
-            if (reserva.Estado != "Reservada") throw new Exception("Solo se pueden cancelar reservas en estado 'Reservada'.");
+            if (reserva.Estado != EstadosReserva.Reservada) throw new Exception($"Solo se pueden cancelar reservas en estado '{EstadosReserva.Reservada}'");
 
             var politica = _politicaRepository.ObtenerPoliticaActiva();
+
+            reserva.Mora = CalcularPenalidadCancelacion(reserva, politica);
+            reserva.Estado = EstadosReserva.Cancelada;
+
+            return _estadiaRepository.Actualizar(reserva);
+        }
+
+        private static decimal CalcularPenalidadCancelacion(Estadia reserva, PoliticaCancelacion politica)
+        {
+            if (politica == null) return 0;
+
             var diasAnticipacion = (reserva.FechaIngreso.Date - DateTime.Now.Date).TotalDays;
 
-            if (politica != null && diasAnticipacion <= politica.DiasLimiteSinMora && diasAnticipacion >= 0)
+            if (diasAnticipacion <= politica.DiasLimiteSinMora && diasAnticipacion >= 0)
             {
-                reserva.Mora = reserva.PrecioAplicado * politica.PorcentajePenalidad;
-            }
-            else
-            {
-                reserva.Mora = 0;
+                return reserva.PrecioAplicado * politica.PorcentajePenalidad;
             }
 
-            reserva.Estado = "Cancelada";
-            return _estadiaRepository.Actualizar(reserva);
+            return 0;
         }
 
         public List<Estadia> BuscarReservasPorHuesped(string terminoBusqueda)
