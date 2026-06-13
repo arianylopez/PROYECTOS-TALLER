@@ -290,10 +290,10 @@ var assemblies = [
   {
     "name": "HotelReservaAPI",
     "classes": [
-      { "name": "HotelReservaAPI.Services.EstadiaService", "rp": "HotelReservaAPI_EstadiaService.html", "cl": 49, "ucl": 101, "cal": 150, "tl": 176, "cb": 13, "tb": 116, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Services.HabitacionService", "rp": "HotelReservaAPI_HabitacionService.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 26, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Services.HuespedService", "rp": "HotelReservaAPI_HuespedService.html", "cl": 20, "ucl": 26, "cal": 46, "tl": 77, "cb": 8, "tb": 14, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "HotelReservaAPI.Services.ServicioService", "rp": "HotelReservaAPI_ServicioService.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Services.EstadiaService", "rp": "HotelReservaAPI_EstadiaService.html", "cl": 81, "ucl": 69, "cal": 150, "tl": 176, "cb": 28, "tb": 116, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Services.HabitacionService", "rp": "HotelReservaAPI_HabitacionService.html", "cl": 10, "ucl": 0, "cal": 10, "tl": 26, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Services.HuespedService", "rp": "HotelReservaAPI_HuespedService.html", "cl": 26, "ucl": 29, "cal": 55, "tl": 92, "cb": 10, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "HotelReservaAPI.Services.ServicioService", "rp": "HotelReservaAPI_ServicioService.html", "cl": 7, "ucl": 6, "cal": 13, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -326,12 +326,6 @@ var riskHotspots = [
       { "value": 16, "exceeded": true },
     ]},
   {
-    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "RegistrarCheckIn(System.String,System.Collections.Generic.List\u00601\u003CSystem.String\u003E)", "methodShortName": "RegistrarCheckIn(...)", "fileIndex": 0, "line": 76,
-    "metrics": [
-      { "value": 272, "exceeded": true },
-      { "value": 16, "exceeded": true },
-    ]},
-  {
     "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "CancelarReserva(System.String)", "methodShortName": "CancelarReserva(...)", "fileIndex": 0, "line": 129,
     "metrics": [
       { "value": 110, "exceeded": true },
@@ -344,10 +338,10 @@ var riskHotspots = [
       { "value": 10, "exceeded": false },
     ]},
   {
-    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "CancelarReserva(System.String)", "methodShortName": "CancelarReserva(...)", "fileIndex": 0, "line": 135,
+    "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "RegistrarCheckIn(System.String,System.Collections.Generic.List\u00601\u003CSystem.String\u003E)", "methodShortName": "RegistrarCheckIn(...)", "fileIndex": 0, "line": 76,
     "metrics": [
-      { "value": 110, "exceeded": true },
-      { "value": 10, "exceeded": false },
+      { "value": 55, "exceeded": true },
+      { "value": 16, "exceeded": true },
     ]},
   {
     "assembly": "HotelReservaAPI", "class": "HotelReservaAPI.Services.EstadiaService", "reportPath": "HotelReservaAPI_EstadiaService.html", "methodName": "RegistrarCheckOut(System.String)", "methodShortName": "RegistrarCheckOut(...)", "fileIndex": 0, "line": 110,

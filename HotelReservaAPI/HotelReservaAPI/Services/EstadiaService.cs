@@ -7,6 +7,13 @@ using Supabase;
 
 namespace HotelReservaAPI.Services
 {
+    public static class EstadosReserva
+    {
+        public const string Reservada = "Reservada";
+        public const string EnCurso = "En curso";
+        public const string Finalizada = "Finalizada";
+        public const string Cancelada = "Cancelada";
+    }
     public class EstadiaService : IEstadiaService
     {
         private readonly IEstadiaRepository _estadiaRepository;
@@ -76,11 +83,11 @@ namespace HotelReservaAPI.Services
         {
             var reserva = _estadiaRepository.ObtenerPorId(estadiaId);
             if (reserva == null) throw new Exception("La reserva no existe.");
-            if (reserva.Estado == "Cancelada") throw new Exception("No se puede hacer check-in de una reserva cancelada.");
-            if (reserva.Estado == "En curso") throw new Exception("El check-in ya fue realizado anteriormente.");
-            if (reserva.Estado != "Reservada") throw new Exception("Estado inválido para registrar check-in.");
+            if (reserva.Estado == EstadosReserva.Cancelada) throw new Exception("No se puede hacer check-in de una reserva cancelada.");
+            if (reserva.Estado == EstadosReserva.EnCurso) throw new Exception("El check-in ya fue realizado anteriormente.");
+            if (reserva.Estado != EstadosReserva.Reservada) throw new Exception("Estado inválido para registrar check-in.");
 
-            reserva.Estado = "En curso";
+            reserva.Estado = EstadosReserva.EnCurso;
             reserva.FechaHoraCheckin = DateTime.Now;
             _estadiaRepository.Actualizar(reserva);
 
@@ -95,7 +102,7 @@ namespace HotelReservaAPI.Services
                         HuespedId = huespedId
                     };
 
-                    _supabase.From<EstadiaHuesped>().Insert(relacion).Wait();
+                    if (_supabase != null) _supabase.From<EstadiaHuesped>().Insert(relacion).Wait();
                 }
             }
 
@@ -103,7 +110,7 @@ namespace HotelReservaAPI.Services
             if (habitacion != null)
             {
                 habitacion.Estado = "Ocupada";
-                _supabase.From<Habitacion>().Update(habitacion).Wait();
+                if (_supabase != null) _supabase.From<Habitacion>().Update(habitacion).Wait();
             }
 
             return reserva;
