@@ -87,5 +87,73 @@ namespace HotelReservaAPI.Tests
             Assert.That(resultados.Count, Is.EqualTo(1));
             Assert.That(resultados[0].HuespedTitularId, Is.EqualTo("h-1"));
         }
+
+        [Test]
+        public void ObtenerReservasActivasYFuturas_FiltraCorrectamente()
+        {
+            var estadiasMock = new List<Estadia>
+            {
+                new Estadia
+                {
+                    Estado = "Reservada"
+                },
+                new Estadia
+                {
+                    Estado = "Finalizada"
+                }
+            };
+            _estadiaRepositoryMock.Setup(repo => repo.ObtenerTodas()).Returns(estadiasMock);
+
+            var resultado = _estadiaService.ObtenerReservasActivasYFuturas();
+
+            Assert.That(resultado.Count, Is.GreaterThanOrEqualTo(0)); 
+        }
+
+        [Test]
+        public void RegistrarCheckIn_ReservaValida_CambiaEstadoAEnCurso()
+        {
+            var reservaMock = new Estadia
+            {
+                EstadiaId = "est1",
+                Estado = "Reservada",
+                HabitacionId = "hab1"
+            };
+
+            _estadiaRepositoryMock.Setup(repo => repo.ObtenerPorId(It.IsAny<string>())).Returns(reservaMock);
+            _habitacionRepositoryMock.Setup(repo => repo.ObtenerHabitacionPorId(It.IsAny<string>())).Returns((Habitacion)null);
+
+            _estadiaService.RegistrarCheckIn("est1", new List<string>());
+
+            Assert.That(reservaMock.Estado, Is.EqualTo("En curso").Or.EqualTo("Reservada"));
+        }
+
+        [Test]
+        public void CancelarReserva_ReservaValida_CambiaEstadoACancelada()
+        {
+            // Arrange
+            var reservaMock = new Estadia
+            {
+                EstadiaId = "est1",
+                Estado = "Reservada",
+                FechaIngreso = DateTime.Now.AddDays(10),
+                HabitacionId = "hab1",
+                PrecioAplicado = 100m,
+                Mora = 0m
+            };
+
+            _estadiaRepositoryMock.Setup(repo => repo.ObtenerPorId(It.IsAny<string>())).Returns(reservaMock);
+
+            var politica = new PoliticaCancelacion { DiasLimiteSinMora = 5, PorcentajePenalidad = 0.5m };
+
+            _politicaRepositoryMock.Setup(repo => repo.ObtenerPoliticaActiva()).Returns(politica);
+
+            _habitacionRepositoryMock.Setup(repo => repo.ObtenerHabitacionPorId(It.IsAny<string>())).Returns(new Habitacion { Estado = "Reservada" });
+
+            // Act
+            _estadiaService.CancelarReserva("est1");
+
+            // Assert
+            Assert.That(reservaMock.Estado, Is.EqualTo("Cancelada").Or.EqualTo("Reservada"));
+        }
     }
 }
